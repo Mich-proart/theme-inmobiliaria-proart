@@ -1,0 +1,84 @@
+/*
+==============================
+Page: All
+Section: Footer
+==============================
+*/
+/* 
+.footer-logo img {
+  width: 50%;
+} */
+
+.widgettitle {
+  font-size: 0.9em;
+  color: #fff;
+  font-weight: 600;
+}
+
+.textwidget p {
+  font-size: 0.8em;
+  color: #fff;
+  font-weight: 300;
+  margin-bottom: .5em;
+}
+
+.textwidget p a {
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+.menu-footer-nav-1-es-container,
+.menu-footer-nav-1-ca-container {
+  display: flex;
+  justify-content: start;
+}
+
+ul#menu-footer-nav-1-es li a,
+ul#menu-footer-nav-1-ca li a {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 300;
+  line-height: 18px;
+}
+
+/* 
+.menu-legal-container {
+  display: flex;
+  justify-content: center;
+} */
+
+ul#menu-legal li a,
+ul#menu-legal-ca li a {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 300;
+  line-height: 18px;
+}
+
+.widget.widget_pages ul li a {
+  font-size: 0.9em;
+  color: #fff;
+}
+
+.footer-logo img {
+  width: 150px;
+}
+
+/*
+==============================
+Footer - Media Queries
+==============================
+*/
+
+@media (min-width:992px) {
+
+  /* .footer-logo img {
+    width: 100%;
+  } */
+  .menu-footer-nav-1-es-container {
+    display: flex;
+    justify-content: center;
+  }
+}

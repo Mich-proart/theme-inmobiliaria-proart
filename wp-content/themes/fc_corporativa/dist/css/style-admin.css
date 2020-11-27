@@ -1,0 +1,19 @@
+/*
+==============================
+Admin Bar
+==============================
+*/
+@font-face {
+    font-family:'Varela Round';
+    src:url(fonts/VarelaRound-Regular.ttf);
+}
+.fc-adminbar a,
+.fc-adminbar p,
+.fc-adminbar span {
+  font-family:'Varela Round', sans-serif;
+  color:#fff;
+}
+.fc-adminbar {
+  z-index:101;
+  position:relative;
+}

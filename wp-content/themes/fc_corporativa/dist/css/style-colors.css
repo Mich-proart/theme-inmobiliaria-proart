@@ -1,0 +1,114 @@
+/*
+==============================
+Colors
+==============================
+*/
+
+.color-grey {
+  color: #4A4A4A;
+}
+
+.color-black {
+  color: #000;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.color-coral {
+  color: #B04929;
+}
+
+.color-blue {
+  color: #8BA8B2;
+}
+
+.color-beige {
+  color: #AF9D88;
+}
+
+.color-beige-t {
+  color: #B4A38F;
+}
+
+.color-custom-black {
+  color: rgba(0, 0, 0, 0.5);
+  ;
+}
+
+/*
+==============================
+Background Colors
+==============================
+*/
+
+.bg-grey-light {
+  background-color: #F7F5F3;
+}
+
+.bg-custom-white {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bg-black {
+  background-color: #000;
+}
+
+.bg-custom-black {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.bg-transparente {
+  background-color: transparent;
+}
+
+.bg-beige {
+  background-color: #AF9D88;
+}
+
+.bg-custom-beige {
+  background-color: rgba(175, 157, 136, 0.1);
+}
+
+.bg-light-grey {
+  background-color: #EAEAEA;
+}
+
+.bg-coral {
+  background-color: #B04929;
+}
+
+.bg-blue {
+  background-color: #8BA8B2;
+}
+
+.bg-dos {
+  background:linear-gradient(122deg, #F7F5F3, #F7F5F3 50%,#B04929 50%,#B04929);
+}
+
+/*
+==============================
+Border Colors
+==============================
+*/
+
+.border-blue {
+  border-color: #232F3D;
+}
+
+.border-black {
+  border-color: #000;
+}
+
+.border-light-blue {
+  border-color: #8CB4C4;
+}
+
+.border-white {
+  border-color: #FFF;
+}
+
+.border-coral {
+  border-color: #B04929;
+}

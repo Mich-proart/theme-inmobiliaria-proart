@@ -1,0 +1,130 @@
+/*
+==============================
+Page: All
+Section: Slick Slider
+==============================
+*/
+
+.slick-dots {
+  text-align: center;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  z-index: 21;
+}
+
+.slick-dots li {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.slick-dots li:last-child {
+  margin-right: 0;
+}
+
+.slick-dots li button {
+  border-color: #EEEEEE;
+  background-color: #EEEEEE;
+  border-radius: 100%;
+  border-width: 2px;
+  border-style: solid;
+  color: #EEEEEE;
+  height: 10px;
+  padding: 0;
+  width: 10px;
+}
+
+.slick-dots li button:hover {
+  cursor: pointer;
+}
+
+.slick-dots li.slick-active button {
+  background-color: #000;
+  border-color: #000;
+}
+
+
+
+.slick-arrow {
+  color: transparent;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-size: 40%;
+  background-position: center;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  box-shadow: 0 0 0;
+  position: absolute;
+  bottom: 15%;
+  z-index: 12;
+  cursor: pointer;
+  background-repeat: no-repeat;
+}
+
+
+.slick-next {
+  background-image: url(../../img/flecha-2.png);
+  right: 10%;
+}
+
+.slick-prev {
+  background-image: url(../../img/flecha-1.png);
+  left: 10%;
+}
+
+
+.galeria-resultados .slick-arrow {
+  color: transparent;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-size: 30%;
+  background-position: center;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  box-shadow: 0 0 0;
+  position: absolute;
+  bottom: 10%;
+  z-index: 12;
+  cursor: pointer;
+  background-repeat: no-repeat;
+}
+
+
+.galeria-resultados .slick-next {
+  background-image: url(../../img/flecha-2.png);
+  right: 2%;
+}
+
+.galeria-resultados .slick-prev {
+  background-image: url(../../img/flecha-1.png);
+  left: 80%;
+}
+
+
+#single .galeria-inversiones .slick-arrow {
+  color: transparent;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-size: 30%;
+  background-position: center;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  box-shadow: 0 0 0;
+  position: absolute;
+  bottom: 10%;
+  z-index: 12;
+  cursor: pointer;
+  background-repeat: no-repeat;
+}
+
+
+#single .galeria-inversiones .slick-next {
+  background-image: url(../../img/flecha-2.png);
+  right: 2%;
+}
+
+#single .galeria-inversiones .slick-prev {
+  background-image: url(../../img/flecha-1.png);
+  left: 80%;
+}

@@ -1,0 +1,457 @@
+/* Tema FC Corporativa */
+/* Custom CSS for FC Corporativa */
+
+/*
+==============================
+Page: Home
+==============================
+*/
+
+
+
+@supports(object-fit: cover) {
+
+	.img-zonas-home img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center center;
+	}
+
+}
+
+.img-zonas-home {
+	height: 272px;
+}
+
+.content-details {
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.text-zonas {
+	font-size: 20px;
+	font-weight: 500;
+	letter-spacing: 4px;
+	line-height: 24px;
+}
+
+.form-control::placeholder {
+	font-size: 12px;
+	letter-spacing: 0;
+	font-weight: 500;
+}
+
+div.wpcf7 .ajax-loader {
+	position: absolute;
+}
+
+
+
+.btn-search {
+	font-size: 15px;
+	font-weight: bold;
+	letter-spacing: 4.62px;
+	line-height: 18px;
+}
+
+.titulo-introducion {
+	font-size: 20px;
+	letter-spacing: 0;
+	line-height: 26px;
+}
+
+.servicios-home {
+	font-size: 17px;
+	font-weight: 500;
+	letter-spacing: 3.4px;
+	line-height: 20px;
+}
+
+.suscribete {
+	font-size: 20px;
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 23px;
+}
+
+.titulo-servicios {
+	font-size: 18px;
+	font-weight: 500;
+	letter-spacing: 3.6px;
+	line-height: 21px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+	color: #fff;
+	background-color: #B04929;
+}
+
+
+.tabs {
+	font-size: 15px;
+	font-weight: bold;
+	letter-spacing: 4.62px;
+	line-height: 18px;
+}
+
+.tabs:hover {
+	color: #B04929;
+}
+
+.ml {
+	margin-left: 0;
+}
+
+
+@media (min-width: 768px) {}
+
+
+@media (min-width: 992px) {
+
+
+	.ml {
+		margin-left: -15px;
+	}
+
+
+	.btn-search {
+		font-size: 15px;
+		font-weight: bold;
+		letter-spacing: 4.62px;
+		line-height: 18px;
+	}
+
+	.titulo-introducion {
+		font-size: 30px;
+		letter-spacing: 0;
+		line-height: 37px;
+	}
+
+	.servicios-home {
+		font-size: 20px;
+		font-weight: 500;
+		letter-spacing: 4px;
+		line-height: 24px;
+		text-align: center;
+	}
+
+	.suscribete {
+		font-size: 30px;
+		font-weight: 500;
+		letter-spacing: 0;
+		line-height: 35px;
+	}
+
+	.titulo-servicios {
+		font-size: 20px;
+		font-weight: 500;
+		letter-spacing: 4px;
+		line-height: 24px;
+	}
+
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+@media (min-width: 1440px) {}
+
+@media (min-width: 1600px) {}
+
+
+/*
+==============================
+Page: Servicios
+==============================
+*/
+
+.home-services .row:nth-child(odd) .img.col-lg-6 {
+	order: 1;
+}
+
+.home-services .row:nth-child(odd) .col-lg-6 {
+	order: 2;
+}
+
+.home-services .row:nth-child(odd) .col-lg-6 .center {
+	text-align: center;
+}
+
+.home-services .row:nth-child(even) .img.col-lg-6 {
+	order: 1;
+}
+
+.home-services .row:nth-child(even) .col-lg-6 {
+	order: 2;
+}
+
+.home-services .row:nth-child(even) .col-lg-6 .center {
+	text-align: center;
+}
+
+.home-services .row:last-child {
+	margin: 0 !important;
+}
+
+.w-lg-100 {
+	width: 100%;
+}
+
+
+@media (min-width: 768px) {}
+
+
+@media (min-width: 992px) {
+
+
+	.home-services .row:nth-child(odd) .img.col-lg-6 {
+		order: 1;
+	}
+
+	.home-services .row:nth-child(odd) .col-lg-6 {
+		order: 2;
+	}
+
+	.home-services .row:nth-child(odd) .col-lg-6 .center {
+		text-align: left;
+	}
+
+	.home-services .row:nth-child(even) .img.col-lg-6 {
+		order: 2;
+	}
+
+	.home-services .row:nth-child(even) .col-lg-6 {
+		order: 1;
+	}
+
+	.home-services .row:nth-child(even) .col-lg-6 .center {
+		text-align: right;
+	}
+
+	.home-services .row:last-child {
+		margin: 3rem 0 !important;
+	}
+
+	.w-lg-100 {
+		width: auto;
+	}
+
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+@media (min-width: 1440px) {}
+
+@media (min-width: 1600px) {}
+
+
+
+/*
+==============================
+Page: Servicios
+==============================
+*/
+
+
+.linea-proceso {
+	height: auto;
+	width: 100px;
+	border: 1px solid #8DAAB3;
+	margin: 1.5em auto;
+}
+
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {
+	.linea-proceso {
+		height: 91px;
+		width: 1px;
+		border: 1px solid #8DAAB3;
+		margin-top: 2.75em;
+	}
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+@media (min-width: 1440px) {}
+
+@media (min-width: 1600px) {}
+
+
+
+/*
+==============================
+Page: INVERSIONES
+==============================
+*/
+
+
+@supports(object-fit: cover) {
+
+	.img-inversiones img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center center;
+	}
+
+	.property-image img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center center;
+	}
+}
+
+.img-inversiones {
+	height: 30vh;
+}
+
+.property-image {
+	height: 28vh;
+}
+
+.leer-mas {
+	font-size: 15px;
+	font-weight: bold;
+	letter-spacing: 4.62px;
+	line-height: 18px;
+}
+
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {
+
+	.img-inversiones {
+		height: 50.96vh;
+	}
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+@media (min-width: 1440px) {}
+
+@media (min-width: 1600px) {}
+
+
+/*
+==============================
+Page: Pagina de resultados
+==============================
+*/
+
+.propiedad {
+	font-size: 18px;
+	letter-spacing: 0;
+	line-height: 18px;
+}
+
+.direccion {
+	font-size: 15px;
+	letter-spacing: 0;
+	line-height: 18px;
+}
+
+.precio {
+	font-size: 15px;
+	font-weight: bold;
+	letter-spacing: 4.62px;
+	line-height: 18px;
+}
+
+
+.titulo-resultados {
+	font-size: 18px;
+	font-weight: 500;
+	letter-spacing: 3.6px;
+	line-height: 21px;
+}
+
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {
+
+	.titulo-resultados {
+		font-size: 25px;
+		font-weight: 500;
+		letter-spacing: 5px;
+		line-height: 29px;
+	}
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+@media (min-width: 1440px) {}
+
+@media (min-width: 1600px) {}
+
+
+
+
+
+
+/*
+==============================
+Page: SINGLE PROPIEDADES
+==============================
+*/
+
+
+
+.equipamientos {
+	font-size: 16px;
+	font-weight: 300;
+	letter-spacing: 0;
+	line-height: 22px;
+	background-color: #F7F5F3;
+}
+
+
+.img-certificado img {
+	width: 70%;
+}
+
+
+.refe {
+	font-size: 20px;
+	letter-spacing: 0;
+	line-height: 26px;
+}
+
+
+#modal-mapa .modal-dialog.modal-lg,
+#video-modal .modal-dialog.modal-lg {
+	margin-top: 7%;
+}
+
+.modal-body iframe.iframe-video {
+	height: 450px;
+}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+@media (min-width: 1440px) {}
+
+@media (min-width: 1600px) {}

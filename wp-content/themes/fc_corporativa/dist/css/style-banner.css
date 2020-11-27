@@ -1,0 +1,189 @@
+/*
+==============================
+Page All
+Section: Banner
+==============================
+*/
+
+.banner {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.banner-mobile {
+  height: 35vh;
+}
+
+.banner-caption {
+  position: absolute;
+  top: 70%;
+  left: 45px;
+  width: 60%;
+  transform: translateY(-50%);
+}
+
+.banner-caption-subtitle {
+  font-size: 1.3em;
+}
+
+.banner-home {
+  height: auto;
+}
+
+.banner-home>img {
+  display: none;
+}
+
+.banner-generico {
+  height: 18vh;
+}
+
+
+.content-banner {
+  position: relative;
+  bottom: auto;
+}
+
+.content-banner2 {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+}
+
+
+.content-banner3 {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.titulo-banner {
+  font-size: 19px;
+  letter-spacing: 0;
+  line-height: 25px;
+  text-align: center;
+  font-weight: 400;
+}
+
+
+.titulo-banner-second {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 3.2px;
+  line-height: 19px;
+}
+
+.height-servicios {
+  height: 40vh;
+}
+
+.height-servicios2 {
+  height: 40vh;
+}
+
+.height-servicios3 {
+  height: 40vh;
+}
+
+@supports(object-fit: cover) {
+
+  .banner-home img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .banner-generico img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .height-servicios img,
+  .height-servicios2 img,
+  .height-servicios3 img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+
+@media (min-width: 992px) {
+
+
+  .banner-home {
+    height: 60vh;
+  }
+
+  .banner-home>img {
+    display: block;
+  }
+
+  .content-banner {
+    position: absolute;
+    bottom: 5%;
+  }
+
+  .banner-desktop {
+    height: 45vh;
+  }
+
+  .banner-caption {
+    left: 8%;
+    width: 40%;
+  }
+
+  .banner-caption-title {
+    font-size: 2.5em;
+  }
+
+  .titulo-banner {
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 47px;
+  }
+
+
+  .titulo-banner-second {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 24px;
+  }
+
+
+  .height-servicios {
+    height: 71.5vh;
+  }
+
+  .height-servicios2 {
+    height: 28vh;
+  }
+
+  .height-servicios3 {
+    height: 40vh;
+  }
+
+  .banner-generico {
+    height: 30.2vh;
+  }
+}
+
+@media (min-width: 1400px) {
+  .banner-caption {
+    left: 10%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .banner-caption {
+    left: 18%;
+  }
+}
