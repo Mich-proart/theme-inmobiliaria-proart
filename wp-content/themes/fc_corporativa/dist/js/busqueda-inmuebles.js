@@ -29,8 +29,8 @@ jQuery(document).ready(function ($) {
 		var idioma = $('#idioma').val();
 		var origin = window.location.origin;
 		var pathname = window.location.pathname.split('/')[1];
-		if (pathname === 'aincasa') {
-			origin = origin + '/aincasa'
+		if (pathname === 'theme-inmobiliaria-proart') {
+			origin = origin + '/theme-inmobiliaria-proart'
 		}
 
 
@@ -145,8 +145,8 @@ jQuery(document).ready(function ($) {
 
 		$('#respuesta_filtro .row').html('');
 
-		if (pathname === 'aincasa') {
-			origin = origin + '/aincasa'
+		if (pathname === 'theme-inmobiliaria-proart') {
+			origin = origin + '/theme-inmobiliaria-proart'
 		}
 		//var precio = $('#filter_precio select option:selected').val();
 

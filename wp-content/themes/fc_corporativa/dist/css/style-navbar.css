@@ -10,7 +10,7 @@ Section: Navbar
 }
 
 .navbar-brand img {
-  width: 150px;
+  width: 80px;
   height: auto;
 }
 
@@ -45,7 +45,7 @@ Section: Navbar
 
 #navbar {
 
-  background-color: #8BA8B2;
+  background-color: #49ba9f;
   color: #fff;
   position: fixed;
   top: 65px;
@@ -197,7 +197,7 @@ Navbar - Media Queries
 
 
   .navbar-brand img {
-    width: 200px;
+    width: 100px;
     height: auto;
   }
 
@@ -227,7 +227,7 @@ Navbar - Media Queries
   }
 
   .navbar-transition.scrolled .navbar-brand img {
-    width: 150px;
+    width: 80px;
     -webkit-transition: all 500ms;
     -moz-transition: all 500ms;
     -o-transition: all 500ms;

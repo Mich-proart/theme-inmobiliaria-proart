@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit11d7052b4ec8b12ab4b47a47ddfbd476
+class ComposerStaticInit90bd76dc7672e476bcd63c4a62ea320a
 {
     public static $classMap = array (
         'PLL_AS3CF' => __DIR__ . '/../..' . '/integrations/wp-offload-media/as3cf.php',
@@ -37,11 +37,13 @@ class ComposerStaticInit11d7052b4ec8b12ab4b47a47ddfbd476
         'PLL_Choose_Lang_Content' => __DIR__ . '/../..' . '/frontend/choose-lang-content.php',
         'PLL_Choose_Lang_Domain' => __DIR__ . '/../..' . '/frontend/choose-lang-domain.php',
         'PLL_Choose_Lang_Url' => __DIR__ . '/../..' . '/frontend/choose-lang-url.php',
+        'PLL_Cookie' => __DIR__ . '/../..' . '/include/cookie.php',
         'PLL_Domain_Mapping' => __DIR__ . '/../..' . '/integrations/domain-mapping/domain-mapping.php',
         'PLL_Duplicate_Post' => __DIR__ . '/../..' . '/integrations/duplicate-post/duplicate-post.php',
         'PLL_Featured_Content' => __DIR__ . '/../..' . '/integrations/jetpack/featured-content.php',
         'PLL_Filters' => __DIR__ . '/../..' . '/include/filters.php',
         'PLL_Filters_Links' => __DIR__ . '/../..' . '/include/filters-links.php',
+        'PLL_Filters_Sanitization' => __DIR__ . '/../..' . '/include/filters-sanitization.php',
         'PLL_Frontend' => __DIR__ . '/../..' . '/frontend/frontend.php',
         'PLL_Frontend_Auto_Translate' => __DIR__ . '/../..' . '/frontend/frontend-auto-translate.php',
         'PLL_Frontend_Filters' => __DIR__ . '/../..' . '/frontend/frontend-filters.php',
@@ -98,6 +100,7 @@ class ComposerStaticInit11d7052b4ec8b12ab4b47a47ddfbd476
         'PLL_Table_Languages' => __DIR__ . '/../..' . '/settings/table-languages.php',
         'PLL_Table_Settings' => __DIR__ . '/../..' . '/settings/table-settings.php',
         'PLL_Table_String' => __DIR__ . '/../..' . '/settings/table-string.php',
+        'PLL_Translate_Option' => __DIR__ . '/../..' . '/include/translate-option.php',
         'PLL_Translated_Object' => __DIR__ . '/../..' . '/include/translated-object.php',
         'PLL_Translated_Post' => __DIR__ . '/../..' . '/include/translated-post.php',
         'PLL_Translated_Term' => __DIR__ . '/../..' . '/include/translated-term.php',
@@ -123,7 +126,7 @@ class ComposerStaticInit11d7052b4ec8b12ab4b47a47ddfbd476
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit11d7052b4ec8b12ab4b47a47ddfbd476::$classMap;
+            $loader->classMap = ComposerStaticInit90bd76dc7672e476bcd63c4a62ea320a::$classMap;
 
         }, null, ClassLoader::class);
     }

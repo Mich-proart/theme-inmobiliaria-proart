@@ -107,14 +107,7 @@ get_header('top-bar');
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1">
                                                     <select class="form-control FormControlSelect2" id="zonas-poblacion"
                                                         name="zonas_poblacion">
-                                                        <option value>
-                                            
-                                                        <?php if (pll_current_language() == 'es') { ?>
-                                                            Elige población
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                            Escull la població
-                                                        <?php } ?>
-                                                        </option>
+                                                        <option value><?php if (pll_current_language() == 'es') { ?>Elige población<?php } else if (pll_current_language() == 'ca') { ?>Escull la població<?php } ?></option>
 
                                                     </select>
                                                 </div>

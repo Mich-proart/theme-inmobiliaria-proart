@@ -14,8 +14,8 @@ jQuery(document).ready(function ($) {
 		poblacion_value = $('#search-poblacion option:selected').val();
 		var origin = window.location.origin;
 		var pathname = window.location.pathname.split('/')[1];
-		if (pathname === 'aincasa') {
-			origin = origin + '/aincasa'
+		if (pathname === 'theme-inmobiliaria-proart') {
+			origin = origin + '/theme-inmobiliaria-proart'
 		}
 		var ajax_url = '/wp-admin/admin-ajax.php';
 		// Send poblacion value to back-end
@@ -43,8 +43,8 @@ jQuery(document).ready(function ($) {
 		tipo_operacion_2 = $('#tipo_operacion_1 option:selected').val();
 		var origin = window.location.origin;
 		var pathname = window.location.pathname.split('/')[1];
-		if (pathname === 'aincasa') {
-			origin = origin + '/aincasa'
+		if (pathname === 'theme-inmobiliaria-proart') {
+			origin = origin + '/theme-inmobiliaria-proart'
 		}
 		var ajax_url = '/wp-admin/admin-ajax.php';
 		// Send precio value to back-end

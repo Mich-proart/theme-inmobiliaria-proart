@@ -17,11 +17,11 @@ Colors
 }
 
 .color-coral {
-  color: #B04929;
+  color: #49ba9f;
 }
 
 .color-blue {
-  color: #8BA8B2;
+  color: #49ba9f;
 }
 
 .color-beige {
@@ -76,15 +76,15 @@ Background Colors
 }
 
 .bg-coral {
-  background-color: #B04929;
+  background-color: #49ba9f;
 }
 
 .bg-blue {
-  background-color: #8BA8B2;
+  background-color: #49ba9f;
 }
 
 .bg-dos {
-  background:linear-gradient(122deg, #F7F5F3, #F7F5F3 50%,#B04929 50%,#B04929);
+  background:linear-gradient(122deg, #F7F5F3, #F7F5F3 50%,#49ba9f 50%,#49ba9f);
 }
 
 /*
@@ -110,5 +110,5 @@ Border Colors
 }
 
 .border-coral {
-  border-color: #B04929;
+  border-color: #49ba9f;
 }

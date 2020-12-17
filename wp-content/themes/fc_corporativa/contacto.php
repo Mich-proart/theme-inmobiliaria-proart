@@ -41,8 +41,9 @@ get_header('top-bar');
         <div class="row">
             <div class="col-lg-6 col-12 p-3 order-lg-1 order-2">
                 <div class="mapa-alt">
+                
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11971.863472458877!2d2.1645239!3d41.3965476!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1d2aaffdb2c33b27!2sAINCASA!5e0!3m2!1ses!2ses!4v1599738369239!5m2!1ses!2ses"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.052435456982!2d2.135609615374163!3d41.37294547926543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49884e1812ee9%3A0xe09cf8259198cbd7!2sCarrer%20de%20Maria%20Vict%C3%B2ria%2C%2008014%20Barcelona!5e0!3m2!1ses!2ses!4v1608233538211!5m2!1ses!2ses"
                         width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""
                         aria-hidden="false" tabindex="0"></iframe>
                 </div>
