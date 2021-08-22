@@ -129,12 +129,14 @@ class Sassy_Social_Share {
 		add_action( 'plugins_loaded', array( $plugin_admin, 'update_db_check' ) );
 		// save GDPR notification flag in DB
 		add_action( 'wp_ajax_heateor_sss_gdpr_notification_read', array( $plugin_admin, 'gdpr_notification_read' ) );
-		// save FB share count notification flag in DB
-		add_action( 'wp_ajax_heateor_sss_fb_count_notification_read', array( $plugin_admin, 'fb_count_notification_read' ) );
 		// save Twitter share count notification flag in DB
 		add_action( 'wp_ajax_heateor_sss_twitter_share_notification_read', array( $plugin_admin, 'twitter_share_notification_read' ) );
 		// save Twitcount notification flag in DB
 		add_action( 'wp_ajax_heateor_sss_twitcount_notification_read', array( $plugin_admin, 'twitcount_notification_read' ) );
+		// ajax function to export plugin configuration
+		add_action( 'wp_ajax_heateor_sss_export_config', array( $plugin_admin, 'export_config' ) );
+		// ajax function to import plugin configuration
+		add_action( 'wp_ajax_heateor_sss_import_config', array( $plugin_admin, 'import_config' ) );
 		// create admin menu
 		add_action( 'admin_menu', array( $plugin_admin, 'create_admin_menu' ) );
 		// set sanitization callback for plugin options
@@ -172,8 +174,6 @@ class Sassy_Social_Share {
 
 		// hook the plugin functions on 'init' event.
 		add_action( 'init', array( $plugin_public, 'init' ) );
-		// remove render sharing action from Excerpts, as it gets nasty due to strip_tags()
-		add_filter( 'get_the_excerpt', array( $plugin_public, 'remove_render_sharing' ), 9 );
 		// hooks to enable sharing interface
 		add_filter( 'the_content', array( $plugin_public, 'render_sharing' ), 99 );
 		add_filter( 'the_excerpt', array( $plugin_public, 'render_sharing' ), 99 );

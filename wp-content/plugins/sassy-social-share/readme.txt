@@ -1,17 +1,17 @@
-﻿=== WordPress Social Sharing Plugin - Sassy Social Share ===
+﻿=== Social Sharing Plugin - Sassy Social Share ===
 Contributors: Heateor, jatin8heateor, farhan8heateor
 Donate link: https://www.heateor.com/donate/?action=Sassy+Social+Share
-Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share
+Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share, gab share, parler share
 Requires at least: 2.5.0
-Tested up to: 5.6
-Stable tag: 3.3.16
+Tested up to: 5.8
+Stable tag: 3.3.23
 License: GPLv2 or later
 
-Slickest, Simplest and Optimized Share buttons. Facebook, Twitter, Reddit, Pinterest, WhatsApp, Parler and over 100 more.
+Slickest, Simplest and Optimized Share buttons. Facebook, Twitter, Reddit, Pinterest, Whatsapp, Parler, Gab and over 100 more.
 
 == Description ==
 
-Sassy Social Share enables your website users to share the content over Facebook, Twitter, Google, LinkedIn, Whatsapp, Tumblr, Pinterest, Reddit, Parler and over 100 more social sharing and bookmarking services.
+Sassy Social Share enables your website users to share the content over Facebook, Twitter, Google, Linkedin, Whatsapp, Tumblr, Pinterest, Reddit, Parler, Gab and over 100 more social sharing and bookmarking services.
 
 This is the Simplest and Smoothest Social Sharing plugin with optimized and great looking vector icons.
 
@@ -25,7 +25,7 @@ This is the Simplest and Smoothest Social Sharing plugin with optimized and grea
 * Compatible with myCRED (append myCRED referral ID at the end of the url being shared)
 * Around **100 Social Sharing/Bookmarking** services
 * Social Media follow icons (Redirect website visitors to your Social Media pages)
-* Share counts are supported for Facebook, Linkedin, Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
+* Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
 * FREE **Icon Customization** options
 * Options to specify sharing icon shape - Square, Round and Rectangular
 * Options to specify sharing icon size - minimum 16 pixels, no upper limit
@@ -117,12 +117,45 @@ This plugin is FREE to download and feel free to use it on your WordPress, Buddy
 Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 
 == Screenshots ==
-1. **Free Icon Customization**: Customizable in thousands Of ways
+1. **Free Icon Customization**: Customizable in thousands of ways
 2. **Icon Customization Options**: Icon Customization options
 3. **Sharing Services**: Over 100 Sharing and Bookmarking services
 4. **Universal Sharing Popup**: Universal Sharing popup having all the supported sharing and bookmarking services
 
 == Changelog ==
+= 3.3.23 [29 July 2021] =
+* [New] Added options to export and import plugin configuration
+
+= 3.3.22 [13 July 2021] =
+* [Improvement] Admin UI improvements
+* [Improvement] Performance improvement of Social Media Follow widget
+
+= 3.3.21 [29 June 2021] =
+* [Bugfix] Floating share Bar was not appearing at the home page when Yoast SEO plugin was active
+* [Bugfix] Pinterest share icon was not working in AMP
+* [Improvement] Updated the Facebook JS SDK being used to the latest version 11.0
+* [Improvement] Admin UI improvement
+* [Improvement] Widgets enabled from the "Appearance > Widgets" page were causing PHP notices in some cases
+* [Improvement] Compatible with PHP 8
+
+= 3.3.20 [11 February 2021] =
+* [Improvement] Improved Gab logo 
+* [Bugfix] Color of Gab share logo was not changing in the "Rearrange Icons" section at the plugin configuration page when customizing from "Theme Selection" section
+* [Bugfix] Title above the standard share bar was not being translated when using WPML
+
+= 3.3.19 [4 February 2021] =
+[Bugfix] After the last update, the checkbox "Disable Standard/Floating Sharing interface on this post" was appearing checked automatically in the Sassy Social Share section at the post/page edit area
+
+= 3.3.18 [3 February 2021] =
+[Improvement] Improved Gab, Whatsapp and Vkontakte logos in the Gab, Whatsapp and Vkontakte share and follow icons
+[Improvement] CSS improvement for social share icons and social media follow icons
+[Improvement] Minor improvements
+
+= 3.3.17 [3 February 2021] =
+[New] Plugin now supports Gab for social sharing and social media follow 
+[Bugfix] Plugin was causing problems when editing the pages and posts in the admin area in some cases
+[Improvement] Improved Whatsapp and Vkontakte icons for AMP
+
 = 3.3.16 [10 December 2020] =
 [Bugfix] Parler share icon was not appearing at the front-end of the website even after selecting at the plugin options page
 [Improvement] Updated Facebook JS SDK being used for the social share shortcode and widget to the latest version 9.0
@@ -952,3 +985,36 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 = 3.3.16 [10 December 2020] =
 [Bugfix] Parler share icon was not appearing at the front-end of the website even after selecting at the plugin options page
 [Improvement] Updated Facebook JS SDK being used for the social share shortcode and widget to the latest version 9.0
+
+= 3.3.17 [3 February 2021] =
+[New] Plugin now supports Gab for social sharing and social media follow 
+[Bugfix] Plugin was causing problems when editing the pages and posts in the admin area in some cases
+[Improvement] Improved Whatsapp and Vkontakte icons for AMP
+
+= 3.3.18 [3 February 2021] =
+[Improvement] Improved Gab, Whatsapp and Vkontakte logos in the Gab, Whatsapp and Vkontakte share and follow icons
+[Improvement] CSS improvement for social share icons and social media follow icons
+[Improvement] Minor improvements
+
+= 3.3.19 [4 February 2021] =
+[Bugfix] After the last update, the checkbox "Disable Standard/Floating Sharing interface on this post" was appearing checked automatically in the Sassy Social Share section at the post/page edit area
+
+= 3.3.20 [11 February 2021] =
+* [Improvement] Improved Gab logo 
+* [Bugfix] Color of Gab share logo was not changing in the "Rearrange Icons" section at the plugin configuration page when customizing from "Theme Selection" section
+* [Bugfix] Title above the standard share bar was not being translated when using WPML
+
+= 3.3.21 [29 June 2021] =
+* [Bugfix] Floating share Bar was not appearing at the home page when Yoast SEO plugin was active
+* [Bugfix] Pinterest share icon was not working in AMP
+* [Improvement] Updated the Facebook JS SDK being used to the latest version 11.0
+* [Improvement] Admin UI improvement
+* [Improvement] Widgets enabled from the "Appearance > Widgets" page were causing PHP notices in some cases
+* [Improvement] Compatible with PHP 8
+
+= 3.3.22 [13 July 2021] =
+* [Improvement] Admin UI improvements
+* [Improvement] Performance improvement of Social Media Follow widget
+
+= 3.3.23 [29 July 2021] =
+* [New] Added options to export and import plugin configuration 

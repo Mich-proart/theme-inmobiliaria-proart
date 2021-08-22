@@ -48,6 +48,7 @@ class Sassy_Social_Share_Sharing_Networks {
 		'xing_share' => '<li style="padding:%padding%px 0 !important" class="heateor_sss_xing">%like_count_container%<div data-type="XING/Share" data-counter="right" data-url="%post_url%" data-lang="%language%"></div><script>(function (d, s) {var x = d.createElement(s), s = d.getElementsByTagName(s)[0]; x.src = "https://www.xing-share.com/js/external/share.js"; s.parentNode.insertBefore(x, s); })(document, "script");</script></li>',
 		'yummly_share' => '<li style="padding:%padding%px 0!important" class="heateor_sss_yummly">%like_count_container%<a href="//yummly.com" class="YUMMLY-YUM-BUTTON">Yum</a><script src="https://www.yummly.com/js/widget.js?general"></script></li>',
 		'parler' => '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("https://parler.com/new-post?message=%post_title%&url=%encoded_post_url%")\'><ss style="%inner_style%" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>',
+		'gab' => '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("https://gab.com/compose?url=%encoded_post_url%&text=%post_title%")\'><ss style="%inner_style%" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>',
 		'reddit_badge' => '<li style="padding:%padding%px 0!important" class="heateor_sss_reddit">%like_count_container%<script type="text/javascript" src="//www.reddit.com/static/button/button1.js"></script></li>',
 		'facebook' => '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("https://www.facebook.com/sharer/sharer.php?u=%encoded_post_url%")\'><ss style="%inner_style%" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>',
 		'twitter' => '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("http://twitter.com/intent/tweet?%via_twitter_username%text=%wpseo_post_title%&url=%encoded_post_url%")\'><ss style="%inner_style%" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>',
@@ -174,6 +175,7 @@ class Sassy_Social_Share_Sharing_Networks {
 		'facebook' => '<a class="heateor_sss_amp heateor_sss_amp_facebook" href="https://www.facebook.com/sharer/sharer.php?u=%encoded_post_url%" title="Facebook" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/facebook.svg" width="%width%" height="%height%" alt="Facebook" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
 		'twitter' => '<a class="heateor_sss_amp heateor_sss_amp_twitter" href="http://twitter.com/intent/tweet?%via_twitter_username%text=%wpseo_post_title%&url=%encoded_post_url%" title="Twitter" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/twitter.svg" width="%width%" height="%height%" alt="Twitter" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
 		'parler' => '<a class="heateor_sss_amp heateor_sss_amp_twitter" href="https://parler.com/new-post?message=%post_title%&url=%encoded_post_url%" title="Parler" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/parler.svg" width="%width%" height="%height%" alt="Parler" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
+		'gab' => '<a class="heateor_sss_amp heateor_sss_amp_twitter" href="https://gab.com/compose?url=%encoded_post_url%&text=%post_title%" title="Gab" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/gab.svg" width="%width%" height="%height%" alt="Gab" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
 		'linkedin' => '<a class="heateor_sss_amp heateor_sss_amp_linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=%encoded_post_url%&title=%post_title%" title="Linkedin" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/linkedin.svg" width="%width%" height="%height%" alt="Linkedin" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
 		'print' => '<a class="heateor_sss_amp heateor_sss_amp_print" href="javascript:void(0)" onclick="window.print()" title="Print" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/print.svg" width="%width%" height="%height%" alt="Print" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
 		'email' => '<a class="heateor_sss_amp heateor_sss_amp_email" href="mailto:?subject=%post_title%&body=%encoded_post_url%" title="Email" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/email.svg" width="%width%" height="%height%" alt="Email" class="amp-wp-enforced-sizes" style="width: %width%px;"></amp-img></a>',
@@ -294,9 +296,6 @@ class Sassy_Social_Share_Sharing_Networks {
 		$this->sharing_networks['pinterest_pin'] = '<li style="padding:%padding%px 0!important;margin-top:-1px!important" class="heateor_sss_%network%">%like_count_container%<a data-pin-lang="%language%" href="//www.pinterest.com/pin/create/button/?url=%post_url%" ' . ( isset( $this->options[$sharing_type . '_counts'] ) ? 'data-pin-count="true"' : 'data-pin-count="false"' ) . ' data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a><script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script></li>';
 		$this->sharing_networks['xing_share'] = '<li style="padding:%padding%px 0 !important" class="heateor_sss_xing">%like_count_container%<div data-type="XING/Share" ' . ( isset( $this->options[$sharing_type . '_counts'] ) ? 'data-counter="right" ' : '' ) . 'data-url="%post_url%" data-lang="%language%"></div><script>(function (d, s) {var x = d.createElement(s), s = d.getElementsByTagName(s)[0]; x.src = "https://www.xing-share.com/js/external/share.js"; s.parentNode.insertBefore(x, s); })(document, "script");</script></li>';
 		$fb_key = '1904103319867886';
-		if ( $this->options['fb_key'] != '' ) {
-			$fb_key = $this->options['fb_key'];
-		}
 		$this->sharing_networks['Facebook_Messenger'] = '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("' . ( $this->check_if_mobile() ? 'fb-messenger://share/?link=%encoded_post_url%' : 'https://www.facebook.com/dialog/send?app_id='. $fb_key .'&display=popup&link=%encoded_post_url%&redirect_uri=%encoded_post_url%' ) . '")\'><ss style="%inner_style%" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>';
 		$whatsapp_share_url = $this->whatsapp_share_api();
 		$this->sharing_networks['whatsapp'] = '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("https://' . $whatsapp_share_url . '.whatsapp.com/send?text=%post_title% %encoded_post_url%")\'><ss style="display:block" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>';
@@ -312,14 +311,27 @@ class Sassy_Social_Share_Sharing_Networks {
 	 */
 	public function fetch_amp_sharing_networks() {
 		
+		if ( in_array( 'pinterest', $this->options['horizontal_re_providers'] ) || in_array( 'pinterest', $this->options['vertical_re_providers'] ) ) {
+			global $post;
+			$pinterest_image_url = '';
+			if ( is_object( $post ) && has_post_thumbnail( $post->ID ) ) {
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+				if ( isset( $image[0] ) && $image[0] ) {
+					$pinterest_image_url = $image[0];
+				}
+			}
+			if ( $pinterest_image_url ) {
+				$pinterest_share_url = 'http://pinterest.com/pin/create/link/?url=%encoded_post_url%&media=' . $pinterest_image_url . '&description=%post_title%';
+			} else {
+				$pinterest_share_url = 'http://pinterest.com/pin/create/link/?url=%encoded_post_url%';
+			}
+		}
 		$this->amp_sharing_networks['instagram'] = str_replace( '%instagram_username%', $this->options['instagram_username'] != '' ? $this->options['instagram_username'] : $this->options['vertical_instagram_username'], $this->amp_sharing_networks['instagram'] );
 		$this->amp_sharing_networks['youtube'] = str_replace( '%youtube_username%', $this->options['youtube_username'] != '' ? $this->options['youtube_username'] : $this->options['vertical_youtube_username'], $this->amp_sharing_networks['youtube'] );
 		$this->amp_sharing_networks['Comment'] = str_replace( '%comment_container_id%', $this->options['comment_container_id'] != '' ? $this->options['comment_container_id'] : $this->options['vertical_comment_container_id'], $this->amp_sharing_networks['Comment'] );
 		$fb_key = '1904103319867886';
-		if ( $this->options['fb_key'] ) {
-			$fb_key = $this->options['fb_key'];
-		}
 		$this->amp_sharing_networks['Facebook_Messenger'] = '<a class="heateor_sss_amp heateor_sss_amp_facebook_messenger" href="' . ( $this->check_if_mobile() ? 'fb-messenger://share/?link=%encoded_post_url%' : 'https://www.facebook.com/dialog/send?app_id=' . $fb_key . '&display=popup&link=%encoded_post_url%&redirect_uri=%encoded_post_url%' ) . '" title="Facebook Messenger" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/facebook_messenger.svg" width="%width%" height="%height%" alt="Facebook Messenger" class="amp-wp-enforced-sizes" style="width:%width%px;"></amp-img></a>';
+		$this->amp_sharing_networks['pinterest'] = '<a class="heateor_sss_amp heateor_sss_amp_pinterest" href="' . $pinterest_share_url . '" title="Pinterest" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/pinterest.svg" width="%width%" height="%height%" alt="Pinterest" class="amp-wp-enforced-sizes" style="width:%width%px;"></amp-img></a>';
 
 		return $this->amp_sharing_networks;
 	

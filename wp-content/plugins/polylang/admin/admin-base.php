@@ -4,20 +4,63 @@
  */
 
 /**
- * Base class for both admin
+ * Setup features available on all admin pages.
  *
  * @since 1.8
  */
-class PLL_Admin_Base extends PLL_Base {
-	public $filter_lang, $curlang, $pref_lang;
+abstract class PLL_Admin_Base extends PLL_Base {
+	/**
+	 * Current language (used to filter the content).
+	 *
+	 * @var PLL_Language
+	 */
+	public $curlang;
 
 	/**
-	 * Loads the polylang text domain
-	 * Setups actions needed on all admin pages
+	 * Language selected in the admin language filter.
+	 *
+	 * @var PLL_Language
+	 */
+	public $filter_lang;
+
+	/**
+	 * Preferred language to assign to new contents.
+	 *
+	 * @var PLL_Language
+	 */
+	public $pref_lang;
+
+	/**
+	 * @var PLL_Filters_Links
+	 */
+	public $filters_links;
+
+	/**
+	 * @var PLL_Admin_Links
+	 */
+	public $links;
+
+	/**
+	 * @var PLL_Admin_Notices
+	 */
+	public $notices;
+
+	/**
+	 * @var PLL_Admin_Static_Pages
+	 */
+	public $static_pages;
+
+	/**
+	 * @var PLL_Admin_Default_Term
+	 */
+	public $default_term;
+
+	/**
+	 * Setups actions needed on all admin pages.
 	 *
 	 * @since 1.8
 	 *
-	 * @param object $links_model
+	 * @param PLL_Links_Model $links_model Reference to the links model.
 	 */
 	public function __construct( &$links_model ) {
 		parent::__construct( $links_model );
@@ -50,6 +93,8 @@ class PLL_Admin_Base extends PLL_Base {
 		$this->links = new PLL_Admin_Links( $this ); // FIXME needed here ?
 		$this->static_pages = new PLL_Admin_Static_Pages( $this ); // FIXME needed here ?
 		$this->filters_links = new PLL_Filters_Links( $this ); // FIXME needed here ?
+		$this->default_term = new PLL_Admin_Default_Term( $this );
+		$this->default_term->add_hooks();
 
 		// Filter admin language for users
 		// We must not call user info before WordPress defines user roles in wp-settings.php
@@ -64,6 +109,8 @@ class PLL_Admin_Base extends PLL_Base {
 	 * Adds the link to the languages panel in the WordPress admin menu
 	 *
 	 * @since 0.1
+	 *
+	 * @return void
 	 */
 	public function add_menus() {
 		global $admin_page_hooks;
@@ -93,7 +140,7 @@ class PLL_Admin_Base extends PLL_Base {
 			$page = 'lang' === $tab ? 'mlang' : "mlang_$tab";
 			if ( empty( $parent ) ) {
 				$parent = $page;
-				add_menu_page( $title, __( 'Languages', 'polylang' ), 'manage_options', $page, null, 'dashicons-translation' );
+				add_menu_page( $title, __( 'Languages', 'polylang' ), 'manage_options', $page, '__return_null', 'dashicons-translation' );
 				$admin_page_hooks[ $page ] = 'languages'; // Hack to avoid the localization of the hook name. See: https://core.trac.wordpress.org/ticket/18857
 			}
 
@@ -105,6 +152,8 @@ class PLL_Admin_Base extends PLL_Base {
 	 * Setup js scripts & css styles ( only on the relevant pages )
 	 *
 	 * @since 0.6
+	 *
+	 * @return void
 	 */
 	public function admin_enqueue_scripts() {
 		$screen = get_current_screen();
@@ -131,12 +180,12 @@ class PLL_Admin_Base extends PLL_Base {
 
 			// Classic editor.
 			if ( ! method_exists( $screen, 'is_block_editor' ) || ! $screen->is_block_editor() ) {
-				$scripts['classic-editor'] = array( array( 'post', 'media', 'async-upload' ), array( 'jquery', 'wp-ajax-response', 'post' ), 0, 1 );
+				$scripts['classic-editor'] = array( array( 'post', 'media', 'async-upload' ), array( 'jquery', 'wp-ajax-response', 'post', 'jquery-ui-dialog', 'wp-i18n' ), 0, 1 );
 			}
 
 			// Block editor with legacy metabox in WP 5.0+.
 			if ( method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor() && ! pll_use_block_editor_plugin() ) {
-				$scripts['block-editor'] = array( array( 'post' ), array( 'jquery', 'wp-ajax-response', 'wp-api-fetch' ), 0, 1 );
+				$scripts['block-editor'] = array( array( 'post' ), array( 'jquery', 'wp-ajax-response', 'wp-api-fetch', 'jquery-ui-dialog', 'wp-i18n' ), 0, 1 );
 			}
 		}
 
@@ -146,11 +195,15 @@ class PLL_Admin_Base extends PLL_Base {
 
 		foreach ( $scripts as $script => $v ) {
 			if ( in_array( $screen->base, $v[0] ) && ( $v[2] || $this->model->get_languages_list() ) ) {
-				wp_enqueue_script( 'pll_' . $script, plugins_url( '/js/' . $script . $suffix . '.js', POLYLANG_FILE ), $v[1], POLYLANG_VERSION, $v[3] );
+				wp_enqueue_script( 'pll_' . $script, plugins_url( '/js/build/' . $script . $suffix . '.js', POLYLANG_ROOT_FILE ), $v[1], POLYLANG_VERSION, $v[3] );
+				if ( 'classic-editor' === $script || 'block-editor' === $script ) {
+					wp_set_script_translations( 'pll_' . $script, 'polylang' );
+				}
 			}
 		}
 
-		wp_enqueue_style( 'polylang_admin', plugins_url( '/css/admin' . $suffix . '.css', POLYLANG_FILE ), array(), POLYLANG_VERSION );
+		wp_register_style( 'polylang_admin', plugins_url( '/css/build/admin' . $suffix . '.css', POLYLANG_ROOT_FILE ), array( 'wp-jquery-ui-dialog' ), POLYLANG_VERSION );
+		wp_enqueue_style( 'polylang_dialog', plugins_url( '/css/build/dialog' . $suffix . '.css', POLYLANG_ROOT_FILE ), array( 'polylang_admin' ), POLYLANG_VERSION );
 
 		$this->localize_scripts();
 	}
@@ -159,11 +212,13 @@ class PLL_Admin_Base extends PLL_Base {
 	 * Enqueue scripts to the WP Customizer.
 	 *
 	 * @since 2.4.0
+	 *
+	 * @return void
 	 */
 	public function customize_controls_enqueue_scripts() {
 		if ( $this->model->get_languages_list() ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			wp_enqueue_script( 'pll_widgets', plugins_url( '/js/widgets' . $suffix . '.js', POLYLANG_FILE ), array( 'jquery' ), POLYLANG_VERSION, true );
+			wp_enqueue_script( 'pll_widgets', plugins_url( '/js/build/widgets' . $suffix . '.js', POLYLANG_ROOT_FILE ), array( 'jquery' ), POLYLANG_VERSION, true );
 			$this->localize_scripts();
 		}
 	}
@@ -172,6 +227,8 @@ class PLL_Admin_Base extends PLL_Base {
 	 * Localize scripts.
 	 *
 	 * @since 2.4.0
+	 *
+	 * @return void
 	 */
 	public function localize_scripts() {
 		if ( wp_script_is( 'pll_widgets', 'enqueued' ) ) {
@@ -198,6 +255,8 @@ class PLL_Admin_Base extends PLL_Base {
 	 * see: https://wordpress.org/support/topic/invalid-url-during-wordpress-new-dashboard-widget-operation
 	 *
 	 * @since 1.4
+	 *
+	 * @return void
 	 */
 	public function admin_print_footer_scripts() {
 		global $post_ID, $tag_ID;
@@ -217,27 +276,48 @@ class PLL_Admin_Base extends PLL_Base {
 		<script type="text/javascript">
 			if (typeof jQuery != 'undefined') {
 				jQuery(
-					function($){
-						$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+					function( $ ){
+						$.ajaxPrefilter( function ( options, originalOptions, jqXHR ) {
 							if ( -1 != options.url.indexOf( ajaxurl ) || -1 != ajaxurl.indexOf( options.url ) ) {
-								if ( 'undefined' === typeof options.data ) {
-									options.data = ( 'get' === options.type.toLowerCase() ) ? '<?php echo $str; // phpcs:ignore WordPress.Security.EscapeOutput ?>' : <?php echo $arr; // phpcs:ignore WordPress.Security.EscapeOutput ?>;
-								} else {
-									if ( 'string' === typeof options.data ) {
-										if ( '' === options.data && 'get' === options.type.toLowerCase() ) {
-											options.url = options.url+'&<?php echo $str; // phpcs:ignore WordPress.Security.EscapeOutput ?>';
-										} else {
-											try {
-												var o = JSON.parse(options.data);
-												o = $.extend(o, <?php echo $arr; // phpcs:ignore WordPress.Security.EscapeOutput ?>);
-												options.data = JSON.stringify(o);
-											}
-											catch(e) {
-												options.data = '<?php echo $str; // phpcs:ignore WordPress.Security.EscapeOutput ?>&'+options.data;
-											}
-										}
+
+								function addPolylangParametersAsString() {
+									if ( 'undefined' === typeof options.data || '' === options.data.trim() ) {
+										// Only Polylang data need to be send. So it could be as a simple query string.
+										options.data = '<?php echo $str; // phpcs:ignore WordPress.Security.EscapeOutput ?>';
 									} else {
-										options.data = $.extend(options.data, <?php echo $arr; // phpcs:ignore WordPress.Security.EscapeOutput ?>);
+										/*
+										 * In some cases data could be a JSON string like in third party plugins.
+										 * So we need not to break their process by adding polylang parameters as valid JSON datas.
+										 */
+										try {
+											options.data = JSON.stringify( Object.assign( JSON.parse( options.data ), <?php echo $arr; // phpcs:ignore WordPress.Security.EscapeOutput ?> ) );
+										} catch( exception ) {
+											// Add Polylang data to the existing query string.
+											options.data = options.data + '&<?php echo $str; // phpcs:ignore WordPress.Security.EscapeOutput ?>';
+										}
+									}
+								}
+
+								/*
+								 * options.processData set to true is the default jQuery process where the data is converted in a query string by using jQuery.param().
+								 * This step is done before applying filters. Thus here the options.data is already a string in this case.
+								 * @See https://github.com/jquery/jquery/blob/3.5.1/src/ajax.js#L563-L569 jQuery ajax function.
+								 * It is the most case WordPress send ajax request this way however third party plugins or themes could be send JSON string.
+								 * Use JSON format is recommended in jQuery.param() documentation to be able to send complex data structures.
+								 * @See https://api.jquery.com/jquery.param/ jQuery param function.
+								 */
+								if ( options.processData ) {
+									addPolylangParametersAsString();
+								} else {
+									/*
+									 * If options.processData is set to false data could be undefined or pass as a string.
+									 * So data as to be processed as if options.processData is set to true.
+									 */
+									if ( 'undefined' === typeof options.data || 'string' === typeof options.data ) {
+										addPolylangParametersAsString();
+									} else {
+										// Otherwise options.data is probably an object.
+										options.data = Object.assign( options.data || {} , <?php echo $arr; // phpcs:ignore WordPress.Security.EscapeOutput ?> );
 									}
 								}
 							}
@@ -253,6 +333,8 @@ class PLL_Admin_Base extends PLL_Base {
 	 * Sets the admin current language, used to filter the content
 	 *
 	 * @since 2.0
+	 *
+	 * @return void
 	 */
 	public function set_current_language() {
 		$this->curlang = $this->filter_lang;
@@ -298,6 +380,8 @@ class PLL_Admin_Base extends PLL_Base {
 	 * Defines the backend language and the admin language filter based on user preferences
 	 *
 	 * @since 1.2.3
+	 *
+	 * @return void
 	 */
 	public function init_user() {
 		// Language for admin language filter: may be empty
@@ -313,12 +397,12 @@ class PLL_Admin_Base extends PLL_Base {
 		$this->pref_lang = empty( $this->filter_lang ) ? $this->model->get_language( $this->options['default_lang'] ) : $this->filter_lang;
 
 		/**
-		 * Filter the preferred language on admin side
-		 * The preferred language is used for example to determine the language of a new post
+		 * Filters the preferred language on admin side.
+		 * The preferred language is used for example to determine the language of a new post.
 		 *
 		 * @since 1.2.3
 		 *
-		 * @param object $pref_lang preferred language
+		 * @param PLL_Language $pref_lang Preferred language.
 		 */
 		$this->pref_lang = apply_filters( 'pll_admin_preferred_language', $this->pref_lang );
 
@@ -348,11 +432,12 @@ class PLL_Admin_Base extends PLL_Base {
 	}
 
 	/**
-	 * Adds the languages list in admin bar for the admin languages filter
+	 * Adds the languages list in admin bar for the admin languages filter.
 	 *
 	 * @since 0.9
 	 *
-	 * @param object $wp_admin_bar
+	 * @param WP_Admin_Bar $wp_admin_bar WP_Admin_Bar global object.
+	 * @return void
 	 */
 	public function admin_bar_menu( $wp_admin_bar ) {
 		$all_item = (object) array(
@@ -379,15 +464,21 @@ class PLL_Admin_Base extends PLL_Base {
 		 */
 		$items = apply_filters( 'pll_admin_languages_filter', array_merge( array( $all_item ), $this->model->get_languages_list() ) );
 
+		$menu = array(
+			'id'    => 'languages',
+			'title' => $selected->flag . $title,
+			'href'  => esc_url( add_query_arg( 'lang', $selected->slug, remove_query_arg( 'paged' ) ) ),
+			'meta'  => array(
+				'title' => __( 'Filters content by language', 'polylang' ),
+			),
+		);
+
+		if ( 'all' !== $selected->slug ) {
+			$menu['meta']['class'] = 'pll-filtered-languages';
+		}
+
 		if ( ! empty( $items ) ) {
-			$wp_admin_bar->add_menu(
-				array(
-					'id'    => 'languages',
-					'title' => $selected->flag . $title,
-					'href'  => esc_url( add_query_arg( 'lang', $selected->slug, remove_query_arg( 'paged' ) ) ),
-					'meta'  => array( 'title' => __( 'Filters content by language', 'polylang' ) ),
-				)
-			);
+			$wp_admin_bar->add_menu( $menu );
 		}
 
 		foreach ( $items as $lang ) {

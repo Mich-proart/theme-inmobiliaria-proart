@@ -30,7 +30,7 @@ class PLL_Settings_Browser extends PLL_Settings_Module {
 			array(
 				'module'        => 'browser',
 				'title'         => __( 'Detect browser language', 'polylang' ),
-				'description'   => __( 'When the front page is visited, set the language according to the browser preference', 'polylang' ),
+				'description'   => __( 'When the front page is visited, redirects to itself in the browser preferred language. As this doesn\'t work if it is cached, Polylang will attempt to disable the front page cache for known cache plugins.', 'polylang' ),
 				'active_option' => $this->is_available() ? 'browser' : false,
 			)
 		);
@@ -67,6 +67,8 @@ class PLL_Settings_Browser extends PLL_Settings_Module {
 	 * as the preferred browser language is not used when the language is set from different domains
 	 *
 	 * @since 1.8
+	 *
+	 * @return void
 	 */
 	public function print_js() {
 		wp_enqueue_script( 'jquery' );
