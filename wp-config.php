@@ -16,13 +16,13 @@
 
 // ** Ajustes de MySQL. Solicita estos datos a tu proveedor de alojamiento web. ** //
 /** El nombre de tu base de datos de WordPress */
-define( 'DB_NAME', 'inmobiliaria-proart' );
+define( 'DB_NAME', 'db_servinghouse' );
 
 /** Tu nombre de usuario de MySQL */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'proyectos-proart' );
 
 /** Tu contraseña de MySQL */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', 'proartdevelopment2020' );
 
 /** Host de MySQL (es muy probable que no necesites cambiarlo) */
 define( 'DB_HOST', 'localhost' );
