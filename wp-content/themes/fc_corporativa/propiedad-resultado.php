@@ -52,7 +52,7 @@ else {
     $zonas_poblacion = '';
   }
   
-get_header('top-bar-classy');
+get_header('top-bar');
 
 
 
