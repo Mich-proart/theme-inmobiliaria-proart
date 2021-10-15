@@ -28,11 +28,7 @@ wp_reset_postdata();
    */
   ?>
 <option value>Zona</option>
-<?php if (pll_current_language() == 'es') { ?>
 <option value>Indiferente</option>
-<?php } else if (pll_current_language() == 'ca') { ?>
-<option value>Indiferent</option>
-<?php } ?>
 
 <?php
 
@@ -74,19 +70,9 @@ function loadprecio() {
 $tipo_operacion_2 = $_POST['tipo_operacion_2'];
 ?>
 
-<label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>
-    Precio maximo
-    <?php } else if (pll_current_language() == 'ca') { ?>
-    Preu màxim
-    <?php } ?></label>
+<label class="color-coral ml-3">Precio maximo</label>
 <select class="form-control" id="precio" name="precio">
-    <option value="5000000">
-        <?php if (pll_current_language() == 'es') { ?>
-        Indiferente
-        <?php } else if (pll_current_language() == 'ca') { ?>
-        Indiferent
-        <?php } ?>
-    </option>
+    <option value="5000000">Indiferente</option>
     <?php if ($tipo_operacion_2 == 8 || $tipo_operacion_2 == 36) { ?>
     <option value="50000">50.000 €</option>
     <option value="100000">100.000 €</option>

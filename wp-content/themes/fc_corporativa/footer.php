@@ -63,7 +63,6 @@
                 <div class="col-sm-12 mt-1 footer-copyright px-0">
                     <div class="text-left">
                         <p class="mb-0 fs-08">
-                            <?php if (pll_current_language() == 'es') { ?>
                             © 2020 · Inmobilaria · Todos los derechos reservados · Desarrollado por
                             
                             <a href="https://www.proart.top"

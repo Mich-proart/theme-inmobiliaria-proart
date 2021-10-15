@@ -21,7 +21,7 @@ get_header('top-bar');
             <div class="col-lg-10 col-12 text-center add-id">
                 <h1 class="titulo-banner color-grey mt-lg-0 mt-2"><?php the_field('titulo_banner') ?></h1>
                 <div class="form-home mt-3">
-                    <form method="post" action="<?php if (pll_current_language() == 'es') { ?><?php echo get_site_url(); ?>/resultado-busqueda<?php } else if (pll_current_language() == 'ca') { ?><?php echo get_site_url(); ?>/ca/resultat-cerca<?php } ?>" id="home_search_form">
+                    <form method="post" action="<?php echo get_site_url(); ?>/resultado-busqueda" id="home_search_form">
                         <div class="container-fluid m-layaout">
                             <div class="row justify-content-center">
                                 <div class="col-lg-10 col-12 pl-0 pr-lg-2 pr-0">
@@ -31,8 +31,7 @@ get_header('top-bar');
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1"  id="tipo_operacion">
                                                     <select class="form-control FormControlSelect2"
                                                         id="tipo_operacion_1" name="tipo_operacion_1">
-                                                        <option value><?php if (pll_current_language() == 'es') { ?>Tipo de operación
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>Tipus d'operació<?php } ?></option>
+                                                        <option value>Tipo de operación</option>
                                                         <?php
                                                         $operaciones = '';
                                                         $tipo_operacion_terms = get_terms(
@@ -51,13 +50,7 @@ get_header('top-bar');
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1">
                                                     <select class="form-control FormControlSelect2"
                                                         id="tipo_propiedad_1" name="tipo_propiedad_1">
-                                                        <option value>
-                                                        <?php if (pll_current_language() == 'es') { ?>
-                                                        Tipo de propiedad
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                        Tipus de propietat
-                                                        <?php } ?>
-                                                        </option>
+                                                        <option value>Tipo de propiedad</option>
                                                         <?php
                                                         $propiedades = '';
                                                         $tipo_propiedad_terms = get_terms(
@@ -77,14 +70,7 @@ get_header('top-bar');
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1" id="search-poblacion">
                                                     <select class="form-control FormControlSelect2" id="poblacion_1"
                                                         name="poblacion_1">
-                                                        <option value>
-                                                        
-                                                        <?php if (pll_current_language() == 'es') { ?>
-                                                            Población
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                            Població
-                                                        <?php } ?>
-                                                        </option>
+                                                        <option value>Población</option>
                                                         <?php
 
                                                     $args = array(  'post_type'     	=> 'poblacion',
@@ -107,7 +93,7 @@ get_header('top-bar');
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1">
                                                     <select class="form-control FormControlSelect2" id="zonas-poblacion"
                                                         name="zonas_poblacion">
-                                                        <option value><?php if (pll_current_language() == 'es') { ?>Elige población<?php } else if (pll_current_language() == 'ca') { ?>Escull la població<?php } ?></option>
+                                                        <option value>Elige población</option>
 
                                                     </select>
                                                 </div>
@@ -116,12 +102,7 @@ get_header('top-bar');
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-12 px-0">
-                                    <input type="submit" class="bg-coral btn text-white h-100 w-100 btn-search" value="
-                                    <?php if (pll_current_language() == 'es') { ?>
-                                        BUSCAR
-                                    <?php } else if (pll_current_language() == 'ca') { ?>
-                                        CERCAR
-                                    <?php } ?>" name="buscador_home"  id="buscador_home">
+                                    <input type="submit" class="bg-coral btn text-white h-100 w-100 btn-search" value="BUSCAR" name="buscador_home"  id="buscador_home">
                                 </div>
                             </div>
                         </div>
@@ -157,7 +138,7 @@ get_header('top-bar');
         <div class="row">
             <div class="col-lg-6 col-12 pr-lg-0 pr-3 mb-lg-0 mb-3 pb-lg-0 pb-3">
                 <a href="#" id="submit-comprar">
-                    <form method="post" action="<?php if (pll_current_language() == 'es') { ?><?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=compra<?php } else if (pll_current_language() == 'ca') { ?><?php echo get_site_url(); ?>/ca/resultat-cerca/?tipo-operacion=compra<?php } ?>" id="home_comprar">
+                    <form method="post" action="<?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=compra" id="home_comprar">
                         <div class="height-servicios">
                             <?php img_with_alt('imagen_servicio_1'); ?>
                             <div class="content-banner2 mt-lg-0 mt-3">
@@ -174,7 +155,7 @@ get_header('top-bar');
                     <div class="row">
                         <div class="col-12 mb-3 pb-3">
                             <a id="submit-alquiler" href="#">
-                                <form method="post" action="<?php if (pll_current_language() == 'es') { ?><?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=alquiler<?php } else if (pll_current_language() == 'ca') { ?><?php echo get_site_url(); ?>/ca/resultat-cerca/?tipo-operacion=lloguer<?php } ?>"
+                                <form method="post" action="<?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=alquiler"
                                     id="home_alquiler">
                                     <div class="height-servicios2">
                                         <?php img_with_alt('imagen_servicio_2'); ?>
@@ -187,7 +168,7 @@ get_header('top-bar');
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="<?php if (pll_current_language() == 'es') { ?><?php echo site_url() ?>/inversiones<?php } else if (pll_current_language() == 'ca') { ?><?php echo site_url() ?>/ca/inversions<?php } ?>">
+                            <a href="<?php echo site_url() ?>/inversiones">
                                 <div class="height-servicios3">
                                     <?php img_with_alt('imagen_servicio_3'); ?>
                                     <div class="content-banner2 mt-2 pt-2">
@@ -225,7 +206,7 @@ get_header('top-bar');
                                 </div>
                                 <div
                                     class="col-lg-4 text-right float-right d-lg-flex justify-content-end px-2 py-lg-2 py-1 mt-4 mt-lg-0">
-                                    <input type="submit" value="<?php if (pll_current_language() == 'es') { ?>SUSCRÍBETE<?php } else if (pll_current_language() == 'ca') { ?>SUBSCRIU-TE<?php } ?>"
+                                    <input type="submit" value="SUSCRÍBETE"
                                         class="form-control text-white b-r-0 bg-black text-uppercase px-4 bg-coral br-0 btn-search">
                                 </div>
                             </div>
@@ -292,7 +273,7 @@ get_header('top-bar');
                                     <div class="col-lg-4 col-12 mb-3 pr-0 pl-lg-3 pl-0">
                                         <a href="#" class="zona-alquiler">
                                             <form method="post"
-                                                action="<?php if (pll_current_language() == 'es') { ?><?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=alquiler<?php } else if (pll_current_language() == 'ca') { ?><?php echo get_site_url(); ?>/ca/resultat-cerca/?tipo-operacion=lloguer<?php } ?>"
+                                                action="<?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=alquiler"
                                                 id="home_alquiler_zona_form">
                                                 <div class="img-zonas-home rel-wrapper limite">
                                                     <?php img_with_alt_featured(); ?>
@@ -328,11 +309,8 @@ get_header('top-bar');
                                                                 );
                                                       $zonas_inicio_query = new WP_Query( $args_numero_zonas );
                                                       $numero_propiedades = $zonas_inicio_query->post_count;
-                                                        echo $numero_propiedades?> <?php if (pll_current_language() == 'es') { ?>
+                                                        echo $numero_propiedades?> 
                                                             propiedades
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                            propietats
-                                                        <?php } ?>
                                                         </div>
                                                         <input type="hidden" name="zona_alquiler_id"
                                                             value="<?php echo $post_id ?>">
@@ -391,7 +369,7 @@ get_header('top-bar');
                                     <div class="col-lg-4 col-12 mb-3 pr-0 pl-lg-3 pl-0">
                                         <a href="#" class="zona-compra">
                                             <form method="post"
-                                                action="<?php if (pll_current_language() == 'es') { ?><?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=compra<?php } else if (pll_current_language() == 'ca') { ?><?php echo get_site_url(); ?>/ca/resultat-cerca/?tipo-operacion=compra<?php } ?>"
+                                                action="<?php echo get_site_url(); ?>/resultado-busqueda/?tipo-operacion=compra"
                                                 id="home_compra_zona_form">
                                                 <div class="img-zonas-home rel-wrapper limite">
                                                     <?php img_with_alt_featured(); ?>
@@ -428,11 +406,8 @@ get_header('top-bar');
                                                     $zonas_inicio_query_compra = new WP_Query( $args_numero_zonas_compra );
                                                     $numero_propiedades = $zonas_inicio_query_compra->post_count;
                                                       echo $numero_propiedades;
-                                                    ?> <?php if (pll_current_language() == 'es') { ?>
+                                                    ?> 
                                                         propiedades
-                                                    <?php } else if (pll_current_language() == 'ca') { ?>
-                                                        propietats
-                                                    <?php } ?>
                                                         </div>
                                                         <input type="hidden" name="zona_compra_id"
                                                             value="<?php echo $post_id ?>">
