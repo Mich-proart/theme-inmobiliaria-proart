@@ -65,9 +65,7 @@
                         <p class="mb-0 fs-08">
                             <?php if (pll_current_language() == 'es') { ?>
                             © 2020 · Inmobilaria · Todos los derechos reservados · Desarrollado por
-                            <?php } else if (pll_current_language() == 'ca') { ?>
-                            © 2020 · Inmobilaria · Tots els drets reservats · Desenvolupat per
-                            <?php } ?>
+                            
                             <a href="https://www.proart.top"
                                 target="_blank">ProArt</a>
 

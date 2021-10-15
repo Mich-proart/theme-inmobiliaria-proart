@@ -15,29 +15,29 @@ if (!empty($_POST['tipo_operacion_1'])) {
     if (!empty($_POST['zonas_poblacion'])) {
       $zonas_poblacion = $_POST['zonas_poblacion'];
     }
-}
+}/* 
 elseif (!empty($_POST['zona_alquiler_id'])) {
     if (pll_current_language() == 'es') {
-        $tipo_operacion_1 = 7;
+        $tipo_operacion_1 = 79;
     }
     elseif (pll_current_language() == 'ca') { 
     $tipo_operacion_1 = 39;
     }
     $tipo_propiedad_1 = '';
-    $poblacion_1 = 300;
+    $poblacion_1 = 532;
     $zonas_poblacion = $_POST['zona_alquiler_id'];
 }
 elseif (!empty($_POST['zona_compra_id'])) {
     if (pll_current_language() == 'es') {
-        $tipo_operacion_1 = 8;
+        $tipo_operacion_1 = 80;
     }
     elseif (pll_current_language() == 'ca') { 
     $tipo_operacion_1 = 36;
     }
     $tipo_propiedad_1 = '';
-    $poblacion_1 = 300;
+    $poblacion_1 = 532;
     $zonas_poblacion = $_POST['zona_compra_id'];
-}
+} */
 
 else {
     $tipo_operacion_slug = htmlspecialchars($_GET["tipo-operacion"]);
@@ -52,7 +52,7 @@ else {
     $zonas_poblacion = '';
   }
   
-get_header('top-bar');
+get_header('top-bar-classy');
 
 
 
@@ -89,7 +89,7 @@ else {
 
 $args_propiedades = array(
             'post_type'       =>  'propiedades',
-            'posts_per_page'  =>  10,
+            'posts_per_page'  =>  1000,
             'paged'           =>  $paged,
             'tax_query'       =>  $cleanArray,
             'meta_query'      =>  $meta_queries,
@@ -127,16 +127,13 @@ $args_propiedades = array(
 
                 <div class="accordion br-0 border-0" id="accordionExample">
                     <div class="card br-0 border-0">
-                        <div class="card-header br-0 border-0 p-0" id="headingOne">
+                        <div class="card-header br-0 border-0 p-0 bg-transparent" id="headingOne">
 
-                            <button class="btn py-lg-3 py-2 w-100 bg-coral text-lg-center text-left pl-lg-2 pl-3"
+                            <button class="br-rounded py-lg-3 py-2 w-100 bg-coral text-lg-center text-left pl-lg-2 pl-3"
                                 type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                                 aria-controls="collapseOne">
-                                <span class="servicios-home d-block text-white"><?php if (pll_current_language() == 'es') { ?>
-                                    FILTROS
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                            FILTRES
-                                                        <?php } ?></span>
+                                <span class="servicios-home d-block text-white">
+                                    <?php pll_e('FILTROS'); ?></span>
                             </button>
 
                         </div>
@@ -146,10 +143,8 @@ $args_propiedades = array(
                             <div class="card-body card-body br-0 border-0 bg-grey-light">
                                 <div class="row mb-3 mt-0 mx-auto">
                                     <div class="col-12 p-0 my-2" id="tipo_operacion">
-                                        <label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>Tipo de operación
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>Tipus d'operació<?php } ?></label>
-                                        <select class="form-control FormControlSelect2" id="tipo_operacion_1"
-                                            name="tipo_operacion_1">
+                                        <label class="color-coral ml-3"><?php pll_e('Tipo de operación'); ?></label>
+                                        <select class="form-control FormControlSelect2" id="tipo_operacion_1" name="tipo_operacion_1">
                                             <?php
                                             
                                                 $tipo_operacion_terms = get_terms(
@@ -177,11 +172,7 @@ $args_propiedades = array(
                                         </select>
                                     </div>
                                     <div class="col-12 p-0 my-2">
-                                        <label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>
-                                                        Tipo de propiedad
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                        Tipus de propietat
-                                                        <?php } ?></label>
+                                        <label class="color-coral ml-3"><?php pll_e('Tipo de propiedad'); ?></label>
                                         <select class="form-control FormControlSelect2" id="tipo_propiedad_1"
                                             name="tipo_propiedad_1">
                                             <?php
@@ -208,12 +199,8 @@ $args_propiedades = array(
                                                     }
                                                 }
                                                 echo $output; ?>
-                                                <option value><?php if (pll_current_language() == 'es') { ?>
-                                                    Indiferente
-                                                    <?php } else if (pll_current_language() == 'ca') { ?>
-                                                    Indiferent
-                                                    <?php } ?></option>
-                                                
+                                            <option value><?php pll_e('Indiferente'); ?></option>
+
                                             <?php else:
                                                         
                                                 foreach( $tipo_propiedad_terms as $term ) {
@@ -221,11 +208,7 @@ $args_propiedades = array(
                                                     $outputt.= '<option value="'. $term->term_id .'">
                                                     '. $term->name .'</option>';
                                                 } ?>
-                                            <option value><?php if (pll_current_language() == 'es') { ?>
-                                            Indiferente
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                            Indiferent
-                                            <?php } ?></option>
+                                            <option value><?php pll_e('Indiferente'); ?></option>
                                             <?php echo $outputt;
                                                 
                                             endif;
@@ -234,11 +217,7 @@ $args_propiedades = array(
                                     </div>
 
                                     <div class="col-12 p-0 my-2" id="search-poblacion">
-                                        <label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>
-                                                            Población
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                            Població
-                                                        <?php } ?></label>
+                                        <label class="color-coral ml-3"><?php pll_e('Provincia'); ?></label>
                                         <select class="form-control FormControlSelect2" id="poblacion_1"
                                             name="poblacion_1">
                                             <?php
@@ -265,18 +244,10 @@ $args_propiedades = array(
                                           endwhile;
                                           wp_reset_query();
                                           ?>
-                                        <option value><?php if (pll_current_language() == 'es') { ?>
-                                            Indiferente
-                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                            Indiferent
-                                        <?php } ?></option>
+                                            <option value><?php pll_e('Indiferente'); ?></option>
 
                                             <?php } else {?>
-                                            <option value=""><?php if (pll_current_language() == 'es') { ?>
-                                            Indiferente
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                            Indiferent
-                                            <?php } ?></option>
+                                            <option value=""><?php pll_e('Indiferente'); ?></option>
                                             <?php
                                         while ( $poblacion_query->have_posts() ) : $poblacion_query->the_post();
                                           $post_id = get_the_ID();
@@ -291,11 +262,7 @@ $args_propiedades = array(
                                     </div>
 
                                     <div class="col-12 p-0 my-2">
-                                        <label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>
-                                        Zona
-                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                        Zona
-                                        <?php } ?></label>
+                                        <label class="color-coral ml-3"><?php pll_e('Municipio'); ?></label>
                                         <select class="form-control FormControlSelect2" id="zonas-poblacion"
                                             name="zonas_poblacion">
 
@@ -317,11 +284,7 @@ $args_propiedades = array(
                                           $zones_query = new WP_Query( $args_zones );
                                             if( $zones_query->have_posts() ) {
                                             ?>
-                                            <option value><?php if (pll_current_language() == 'es') { ?>
-                                            Indiferente
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                            Indiferent
-                                            <?php } ?></option>
+                                            <option value><?php pll_e('Indiferente'); ?></option>
                                             <?php
                                             while ( $zones_query->have_posts() ) : $zones_query->the_post();
                                               $post_id = get_the_ID();
@@ -332,7 +295,7 @@ $args_propiedades = array(
                                             wp_reset_postdata();
                                             }
                                             else {
-                                                echo '<option value>No hay resultados para esa Población</option>';
+                                                echo '<option value>No hay resultados para esa provincia</option>';
                                             }
                                           ?>
 
@@ -363,31 +326,19 @@ $args_propiedades = array(
                                           }
                                           endwhile;
                                           wp_reset_postdata();?>
-                                          
-                                        <?php } else { ?>
-                                            <option value><?php if (pll_current_language() == 'es') { ?>
-                                                            Elija Población
-                                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                                            Triï Població
-                                                        <?php } ?></option>
+
+                                            <?php } else { ?>
+                                            <option value><?php pll_e('Elija Provincia'); ?></option>
                                             <?php } ?>
 
                                         </select>
                                     </div>
 
                                     <div class="col-12 p-0 my-2" id="cambio-precio">
-                                        <label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>
-                                        Precio maximo
-                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                        Preu màxim
-                                        <?php } ?></label>
+                                        <label class="color-coral ml-3"><?php pll_e('Precio máximo'); ?></label>
                                         <select class="form-control FormControlSelect2" id="precio" name="precio">
-                                            <option value="5000000"><?php if (pll_current_language() == 'es') { ?>
-                                            Indiferente
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                            Indiferent
-                                            <?php } ?></option>
-                                            <?php if ($tipo_operacion_1 == 8 || $tipo_operacion_1 == 36) { ?>
+                                            <option value="5000000"><?php pll_e('Indiferente'); ?></option>
+                                            <?php if ($tipo_operacion_1 == 80 ) { ?>
                                             <option value="50000">50.000 €</option>
                                             <option value="100000">100.000 €</option>
                                             <option value="150000">150.000 €</option>
@@ -406,7 +357,7 @@ $args_propiedades = array(
                                             <option value="2000000">2.000.000 €</option>
                                             <option value="3000000">3.000.000 €</option>
                                             <option value="4000000">4.000.000 €</option>
-                                            <?php } elseif($tipo_operacion_1 == 7 || $tipo_operacion_1 == 39) { ?>
+                                            <?php } elseif($tipo_operacion_1 == 79 ) { ?>
                                             <option value="500">500 €</option>
                                             <option value="600">600 €</option>
                                             <option value="650">650 €</option>
@@ -431,23 +382,15 @@ $args_propiedades = array(
                                         </select>
                                     </div>
                                     <div class="col-12 p-0 my-2">
-                                        <label class="color-coral ml-3"><?php if (pll_current_language() == 'es') { ?>
-                                            Encuentra una referencia
-                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                            Troba una referència
-                                        <?php } ?></label>
+                                        <label
+                                            class="color-coral ml-3"><?php pll_e('Encuentra una referencia'); ?></label>
                                         <input type="text" class="form-control" id="refe" name="refe"
-                                            placeholder="Ej. 248-referencia">
+                                            placeholder="Ej. TRADYNG2021-referencia">
                                     </div>
                                     <div class="col-12 p-0 my-2 pb-4">
-                                    <input type="hidden" value="<?php pll_current_language(); ?>" id="idioma">
+                                        <input type="hidden" value="<?php pll_current_language(); ?>" id="idioma">
 
-                                        <input type="submit" class="bg-coral px-4 py-3 btn text-white h-100 btn-search"
-                                            value="<?php if (pll_current_language() == 'es') { ?>
-                                            BUSCAR
-                                        <?php } else if (pll_current_language() == 'ca') { ?>
-                                            CERCAR
-                                        <?php } ?>" id="buscador_resultados">
+                                        <input type="submit" class="bg-coral px-4 py-3 btn text-white h-100 btn-search" value="BUSCAR" id="buscador_resultados">
                                     </div>
                                 </div>
                             </div>
@@ -465,7 +408,7 @@ $args_propiedades = array(
                             <div class="row">
                                 <div class="col-lg-9 d-none d-lg-block p-0 m-0">
                                     <h1 class="mb-0 titulo-resultados text-uppercase operacion">
-                                    <?php
+                                        <?php
                                             
                                             $tipo_operacion_title = get_terms(
                                                 array('taxonomy' => 'tipo-operacion',
@@ -487,26 +430,10 @@ $args_propiedades = array(
                                         action="<?php echo site_url() ?>/wp-admin/admin-ajax.php">
                                         <select class="form-control FormControlSelect2 custom-inputs" id="select_orden"
                                             name="ordenar_precio">
-                                            <option><?php if (pll_current_language() == 'es') { ?>
-                                            Ordenar
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                                Ordenar
-                                            <?php } ?></option>
-                                            <option value="precio_mayor"><?php if (pll_current_language() == 'es') { ?>
-                                                Precio (mayor)
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                                Preu (major)
-                                            <?php } ?></option>
-                                            <option value="precio_menor"><?php if (pll_current_language() == 'es') { ?>
-                                                Precio (menor)
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                                Preu (menor)
-                                            <?php } ?></option>
-                                            <option value="date"><?php if (pll_current_language() == 'es') { ?>
-                                                Más recientes
-                                            <?php } else if (pll_current_language() == 'ca') { ?>
-                                                Més recents
-                                            <?php } ?></option>
+                                            <option><?php pll_e('Ordenar'); ?></option>
+                                            <option value="precio_mayor"><?php pll_e('Precio mayor'); ?></option>
+                                            <option value="precio_menor"><?php pll_e('Precio menor'); ?></option>
+                                            <option value="date"><?php pll_e('Mas recientes'); ?></option>
                                         </select>
                                         <input type="hidden" value="<?php pll_current_language(); ?>" id="idioma_ordenar">
                                     </form>
@@ -525,7 +452,7 @@ $args_propiedades = array(
                         $post_id = get_the_ID();
                     ?>
                     <div class="col-lg-6 col-12">
-                        <div class="card mb-5 br-0 border-right border-top-0 border-bottom-0 border-left-0">
+                        <div class="card mb-5 br-0 border-right-0 border-top-0 border-bottom-0 border-left-0 br-x">
                             <div class="galeria-resultados">
 
                                 <?php
@@ -534,9 +461,9 @@ $args_propiedades = array(
                                 ?>
 
                                 <div class="img-zonas-home">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php img_with_alt_sub('imagen_propiedades'); ?>
-                                </a>
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php img_with_alt_sub('imagen_propiedades'); ?>
+                                    </a>
                                 </div>
 
                                 <?php
@@ -545,11 +472,38 @@ $args_propiedades = array(
                                 ?>
 
                             </div>
-                            <div class="card-body border-left border-bottom">
+                            <div class="card-body border-left border-right br-0">
                                 <a href="<?php the_permalink(); ?>">
-                                    <h3 class="mb-1 propiedad"><?php the_title(); ?></h3>
+                                    <h3 class="mb-1 propiedad color-orange-gradiente fw-900"><?php the_title(); ?></h3>
                                 </a>
-                                <p class="direccion"><?php the_field('ubicacion_de_la_propiedad'); ?></p>
+                                
+                                <?php 
+                                    if ( is_user_logged_in() && get_field('mostrar_direccion') == 'Dirección Exacta') {
+
+                                   /*  $user = wp_get_current_user();
+                                    $user_id = $user->ID;
+                                    $user_info = get_userdata($user_id);
+
+                                    if ( in_array( 'vendedor', $user_info->roles ) || in_array( 'administrator', $user_info->roles ) ) : */
+
+                                    ?>
+
+                                    <p class="card-text fw-500 color-blue">
+                                        <?php the_field('ubicacion_de_la_propiedad');?>
+                                    </p>
+
+                                    <?php } elseif (get_field('mostrar_direccion') == 'No mostrar') { ?>
+                                        <p class="card-text fw-500 color-blue">
+
+                                        </p>
+                                        <?php}
+                                        ?>
+
+                                <?php 
+                                //endif;
+                                }else {
+                                    echo '<span class="text-white direccion fs-08 fw-600">Suscríbete para ver contenido oculto</span>';	
+                                }?>
                                 <div class="container">
                                     <div class="row">
                                         <?php
@@ -560,11 +514,13 @@ $args_propiedades = array(
 
                                             <div class="mb-3 d-flex align-items-center">
                                                 <span class="icon-area color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"><?php the_sub_field('metros_cuadrados'); ?> m<sup>2</sup></p>
+                                                <p class="mb-0 fs-09"><?php the_sub_field('metros_cuadrados'); ?>
+                                                    m<sup>2</sup></p>
                                             </div>
                                             <div class="mb-3 d-flex align-items-center">
                                                 <span class="icon-bathroom color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"> <?php the_sub_field('banos'); ?> <?php if (pll_current_language() == 'es') { ?>Baños<?php } else if (pll_current_language() == 'ca') { ?>Banys<?php } ?></p>
+                                                <p class="mb-0 fs-09"> <?php the_sub_field('banos'); ?>
+                                                    <?php pll_e('Baños'); ?></p>
                                             </div>
 
 
@@ -573,25 +529,34 @@ $args_propiedades = array(
                                         <div class="col-6 px-0 mx-0">
                                             <div class="mb-3 d-flex align-items-center">
                                                 <span class="icon-bed color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"><?php the_sub_field('habitaciones'); ?> <?php if (pll_current_language() == 'es') { ?>Habitaciones<?php } else if (pll_current_language() == 'ca') { ?>Habitacions<?php } ?></p>
+                                                <p class="mb-0 fs-09"><?php the_sub_field('habitaciones'); ?>
+                                                    <?php pll_e('Habitaciones'); ?></p>
                                             </div>
+                                            <?php if( get_sub_field('plazas_de_parkings') ) {?>
                                             <div class="mb-3 d-flex align-items-center">
                                                 <span class="icon-parking color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"> <?php the_sub_field('plazas_de_parkings'); ?> <?php if (pll_current_language() == 'es') { ?>Plaza garaje<?php } else if (pll_current_language() == 'ca') { ?>Plaza garatge<?php } ?></p>
+                                                <p class="mb-0 fs-09"> <?php the_sub_field('plazas_de_parkings'); ?>
+                                                    <?php pll_e('Plaza Garaje'); ?></p>
                                             </div>
+                                            <?php } ?>
                                         </div>
                                         <?php
                                         endwhile;
                                         endif;
                                         ?>
+                                        <div class="col-12">
+                                            <a href="<?php the_permalink(); ?>" class="mb-1 propiedad color-blue fw-900">Ver Detalles</a>
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="card-footer px-5 bg-dos d-flex justify-content-between br-0 border-0">
-                                <span class="text-uppercase precio color-beige"><?php if (pll_current_language() == 'es') { ?>Precio<?php } else if (pll_current_language() == 'ca') { ?>Preu<?php } ?></span>
-                                <span class="text-white direccion fw-600"><?php echo number_format(intval(get_field('precio')), 0,",","."); ?>
-                                    <?php if ($tipo_operacion_1 == 8 || $tipo_operacion_1 == 36) { ?>
+                            <div class="card-footer px-5 bg-coral d-flex justify-content-between border-0">
+                                <span class="text-uppercase precio text-white fw-600"><?php pll_e('Precio'); ?></span>
+                                
+                                <span
+                                    class="text-white direccion fw-600"><?php echo number_format(intval(get_field('precio')), 0,",","."); ?>
+                                    <?php if ($tipo_operacion_1 == 80 ) { ?>
                                     €
                                     <?php }else{?>
                                     €/mes
@@ -607,11 +572,10 @@ $args_propiedades = array(
                     } 
                     else {?>
                     <div class="col-12">
-                    <?php if (pll_current_language() == 'es') { ?>
-                        <span class="titulo-resultados">No hay resultados para la búsqueda actual. </span>
-                    <?php } else if (pll_current_language() == 'ca') { ?>
-                        <span class="titulo-resultados">No hi ha resultats per a la cerca actual. </span>
-                    <?php }} ?>
+
+                        <?php pll_e('No hay resultados para la búsqueda actual.'); ?>
+
+                        <?php  } ?>
                     </div>
                 </div>
             </div>
