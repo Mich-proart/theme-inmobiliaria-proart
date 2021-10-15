@@ -234,7 +234,7 @@ require get_template_directory() . '/inc/dynamic-fields.php';
 /**
  * Add last nav items
  */
-require get_template_directory() . '/inc/add-last-nav-item.php';
+//require get_template_directory() . '/inc/add-last-nav-item.php';
 
 
 /**
