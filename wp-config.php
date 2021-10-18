@@ -19,10 +19,10 @@
 define( 'DB_NAME', 'db_servinghouse' );
 
 /** Tu nombre de usuario de MySQL */
-define( 'DB_USER', 'proyectos-proart' );
+define( 'DB_USER', 'root' );
 
 /** Tu contraseña de MySQL */
-define( 'DB_PASSWORD', 'proartdevelopment2020' );
+define( 'DB_PASSWORD', '' );
 
 /** Host de MySQL (es muy probable que no necesites cambiarlo) */
 define( 'DB_HOST', 'localhost' );
