@@ -158,7 +158,7 @@ get_header('top-bar');
                                         <div class="mb-3 col-lg-4 col-6 d-flex align-items-center">
                                             <span class="icon-heating color-coral fs-18 mr-2"></span>
                                             <p class="mb-0 fs-09">
-                                                <?php if (pll_current_language() == 'es') { ?>Calefacción<?php } else if (pll_current_language() == 'ca') { ?>Calefacció<?php } ?>
+                                                Calefacción
                                             </p>
                                         </div>
                                         <?php } ?>
@@ -166,19 +166,19 @@ get_header('top-bar');
                                         <div class="mb-3 col-lg-4 col-6 d-flex align-items-center">
                                             <span class="icon-bathroom color-coral fs-18 mr-2"></span>
                                             <p class="mb-0 fs-09"> <?php the_sub_field('banos'); ?>
-                                                <?php if (pll_current_language() == 'es') { ?>Baños<?php } else if (pll_current_language() == 'ca') { ?>Banys<?php } ?>
+                                               Baños
                                             </p>
                                         </div>
                                         <div class="mb-3 col-lg-4 col-6 d-flex align-items-center">
                                             <span class="icon-parking color-coral fs-18 mr-2"></span>
                                             <p class="mb-0 fs-09"> <?php the_sub_field('plazas_de_parkings'); ?>
-                                                <?php if (pll_current_language() == 'es') { ?>Plaza<?php } else if (pll_current_language() == 'ca') { ?>Plaça<?php } ?>
+                                               Plaza
                                             </p>
                                         </div>
                                         <div class="mb-3 col-lg-4 col-6 d-flex align-items-center">
                                             <span class="icon-hotel color-coral fs-18 mr-2"></span>
                                             <p class="mb-0 fs-09"> <?php the_sub_field('planta'); ?>
-                                                <?php if (pll_current_language() == 'es') { ?>Planta<?php } else if (pll_current_language() == 'ca') { ?>Planta<?php } ?>
+                                                Planta
                                             </p>
                                         </div>
 
@@ -186,18 +186,16 @@ get_header('top-bar');
                                             <a href="#" data-toggle="modal" data-target="#video-modal"
                                                 class="d-flex align-items-center">
                                                 <span class="icon-video color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"> <?php if (pll_current_language() == 'es') { ?>Ver
-                                                    Vídeo<?php } else if (pll_current_language() == 'ca') { ?>Veure
-                                                    Vídeo<?php } ?></p>
+                                                <p class="mb-0 fs-09">Ver
+                                                    Vídeo
                                             </a>
                                         </div>
                                         <div class="mb-3 col-lg-4 col-6">
                                             <a href="#" data-toggle="modal" data-target="#modal-mapa"
                                                 class="d-flex align-items-center">
                                                 <span class="icon-location color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"> <?php if (pll_current_language() == 'es') { ?>Ver
-                                                    Mapa<?php } else if (pll_current_language() == 'ca') { ?>Veure
-                                                    Mapa<?php } ?></p>
+                                                <p class="mb-0 fs-09">Ver
+                                                    Mapa
                                             </a>
                                         </div>
 
@@ -206,7 +204,7 @@ get_header('top-bar');
                                         <div class="mb-3 col-lg-4 col-6 d-flex align-items-center">
                                             <span class="icon-elevator color-coral fs-18 mr-2"></span>
                                             <p class="mb-0 fs-09">
-                                                <?php if (pll_current_language() == 'es') { ?>Ascensor<?php } else if (pll_current_language() == 'ca') { ?>Ascensor<?php } ?>
+                                               Ascensor
                                             </p>
                                         </div>
                                         <?php } ?>
@@ -215,8 +213,7 @@ get_header('top-bar');
                                             if( get_sub_field('terraza') ) {?>
                                         <div class="mb-3 col-lg-4 col-6 d-flex align-items-center">
                                             <span class="icon-balcony color-coral fs-18 mr-2"></span>
-                                            <p class="mb-0 fs-09">
-                                                <?php if (pll_current_language() == 'es') { ?>Terraza<?php } else if (pll_current_language() == 'ca') { ?>Terraza<?php } ?>
+                                            <p class="mb-0 fs-09">Terraza
                                             </p>
                                         </div>
                                         <?php } ?>
@@ -230,14 +227,24 @@ get_header('top-bar');
                                 </div>
                                 <div class="mb-2 card-footer px-5 bg-dos d-flex justify-content-between br-0 border-0">
                                     <span
-                                        class="text-uppercase precio color-beige"><?php if (pll_current_language() == 'es') { ?>Precio<?php } else if (pll_current_language() == 'ca') { ?>Preu<?php } ?></span>
+                                        class="text-uppercase precio color-beige">Precio</span>
                                     <span class="text-white direccion fw-600">
-                                        <?php echo number_format(intval(get_field('precio')), 0,",","."); ?> €/
-                                        mes</span>
+                                        <?php echo number_format(intval(get_field('precio')), 0,",","."); ?> 
+									 <?php 
+                                         $terms_tax = get_the_terms( $post->ID, 'tipo-operacion' );
+                                         foreach ($terms_tax as $term) {
+                                             $id = $term->term_id;
+                                         }
+                                        if ($id == 8 ) { ?>
+                                        €
+                                        <?php }else{?>
+                                        €/mes
+                                        <?php } ?>
+									</span>
                                 </div>
                                 <div class="mb-lg-5 mb-3 text-lg-right text-left">
                                     <p class="mb-0 fs-09"><b><?php the_field('titilo_indice_de_referencia');?>:</b> <?php the_field('valor_indice_de_referencia');?> €/m² </p>
-                                    <p class="mb-0 fs-09"><?php if (pll_current_language() == 'es') { ?>Fianza de<?php } else if (pll_current_language() == 'ca') { ?>Fiança de<?php } ?> <?php the_field('meses_de_fianza');?> <?php if (pll_current_language() == 'es') { ?>meses<?php } else if (pll_current_language() == 'ca') { ?>mesos<?php } ?></p>
+                                    <p class="mb-0 fs-09">Fianza de meses</p>
                                 </div>
                             </div>
                             <div class="col-12 order-2 d-lg-block d-none">
