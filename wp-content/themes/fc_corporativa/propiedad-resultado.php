@@ -338,7 +338,7 @@ $args_propiedades = array(
                                         <label class="color-coral ml-3"><?php pll_e('Precio máximo'); ?></label>
                                         <select class="form-control FormControlSelect2" id="precio" name="precio">
                                             <option value="5000000"><?php pll_e('Indiferente'); ?></option>
-                                            <?php if ($tipo_operacion_1 == 80 ) { ?>
+                                            <?php if ($tipo_operacion_1 == 8 ) { ?>
                                             <option value="50000">50.000 €</option>
                                             <option value="100000">100.000 €</option>
                                             <option value="150000">150.000 €</option>
@@ -357,7 +357,7 @@ $args_propiedades = array(
                                             <option value="2000000">2.000.000 €</option>
                                             <option value="3000000">3.000.000 €</option>
                                             <option value="4000000">4.000.000 €</option>
-                                            <?php } elseif($tipo_operacion_1 == 79 ) { ?>
+                                            <?php } elseif($tipo_operacion_1 == 7 ) { ?>
                                             <option value="500">500 €</option>
                                             <option value="600">600 €</option>
                                             <option value="650">650 €</option>
@@ -556,7 +556,7 @@ $args_propiedades = array(
                                 
                                 <span
                                     class="text-white direccion fw-600"><?php echo number_format(intval(get_field('precio')), 0,",","."); ?>
-                                    <?php if ($tipo_operacion_1 == 80 ) { ?>
+                                    <?php if ($tipo_operacion_1 == 8 ) { ?>
                                     €
                                     <?php }else{?>
                                     €/mes
