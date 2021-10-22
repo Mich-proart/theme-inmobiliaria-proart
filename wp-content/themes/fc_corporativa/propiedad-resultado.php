@@ -385,7 +385,7 @@ $args_propiedades = array(
                                         <label
                                             class="color-coral ml-3"><?php pll_e('Encuentra una referencia'); ?></label>
                                         <input type="text" class="form-control" id="refe" name="refe"
-                                            placeholder="Ej. TRADYNG2021-referencia">
+                                            placeholder="Ej. SERVINGHOUSE2021-referencia">
                                     </div>
                                     <div class="col-12 p-0 my-2 pb-4">
                                         <input type="hidden" value="<?php pll_current_language(); ?>" id="idioma">
