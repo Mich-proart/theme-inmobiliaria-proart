@@ -21,80 +21,41 @@ get_header('top-bar');
             <div class="col-lg-10 col-12 text-center add-id">
                 <h1 class="titulo-banner color-grey mt-lg-0 mt-2"><?php the_field('titulo_banner') ?></h1>
                 <div class="form-home mt-3">
+                    
                     <form method="post" action="<?php echo get_site_url(); ?>/resultado-busqueda" id="home_search_form">
                         <div class="container-fluid m-layaout">
                             <div class="row justify-content-center">
                                 <div class="col-lg-10 col-12 pl-0 pr-lg-2 pr-0">
                                     <div class="container-fluid">
                                         <div class="row justify-content-center">
+                                            
                                             <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-lg-2 pr-0 mb-lg-0 mb-2">
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1"  id="tipo_operacion">
-                                                    <select class="form-control FormControlSelect2"
-                                                        id="tipo_operacion_1" name="tipo_operacion_1">
-                                                        <option value>Tipo de operación</option>
-                                                        <?php
-                                                        $operaciones = '';
-                                                        $tipo_operacion_terms = get_terms(
-                                                        array('taxonomy' => 'tipo-operacion',
-                                                        'hide_empty' => false)
-                                                        );
-                                                        foreach ($tipo_operacion_terms as $term) {
-                                                        $operaciones .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';
-                                                        }
-                                                        echo $operaciones;
-                                                    ?>
+                                                    <select class="form-control FormControlSelect2" id="tipo_operacion_1" name="tipo_operacion_1">
+                                                        <option value><?php pll_e('Tipo de operación'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-lg-2 pr-0 mb-lg-0 mb-2">
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1">
-                                                    <select class="form-control FormControlSelect2"
-                                                        id="tipo_propiedad_1" name="tipo_propiedad_1">
-                                                        <option value>Tipo de propiedad</option>
-                                                        <?php
-                                                        $propiedades = '';
-                                                        $tipo_propiedad_terms = get_terms(
-                                                        array('taxonomy' => 'tipo-propiedad',
-                                                        'hide_empty' => false)
-                                                        );
-                                                        foreach ($tipo_propiedad_terms as $term) {
-                                                        $propiedades .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';
-                                                        }
-                                                        echo $propiedades;
-                                                    ?>
+                                                    <select class="form-control FormControlSelect2" id="tipo_propiedad_1" name="tipo_propiedad_1">
+                                                        <option value><?php pll_e('Tipo de propiedad'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-lg-2 pr-0 mb-lg-0 mb-2">
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1" id="search-poblacion">
-                                                    <select class="form-control FormControlSelect2" id="poblacion_1"
-                                                        name="poblacion_1">
-                                                        <option value>Población</option>
-                                                        <?php
-
-                                                    $args = array(  'post_type'     	=> 'poblacion',
-                                                                                    'posts_per_page' 	=> -1,
-                                                                                    'orderby'					=> 'title',
-                                                                                    'order'   				=> 'ASC'
-                                                                    );
-                                                    $poblacion_query = new WP_Query( $args );
-                                                    while ( $poblacion_query->have_posts() ) : $poblacion_query->the_post();
-                                                        $post_id = get_the_ID();
-                                                        ?>
-                                                        <option value="<?php echo $post_id ?>"><?php the_title() ?></option>
-                                                        <?php endwhile;
-                                                        wp_reset_query();
-                                                        ?>
+                                                    <select class="form-control FormControlSelect2" id="poblacion_1" name="poblacion_1">
+                                                        <option value><?php pll_e('Municipio'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-0 mb-lg-0 mb-2">
                                                 <div class="bg-white pt-lg-2 pb-lg-2 pt-0 pb-1">
-                                                    <select class="form-control FormControlSelect2" id="zonas-poblacion"
-                                                        name="zonas_poblacion">
-                                                        <option value>Elige población</option>
-
+                                                    <select class="form-control FormControlSelect2" id="zonas-poblacion" name="zonas_poblacion">
+                                                        <option value><?php pll_e('Zona'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -107,6 +68,7 @@ get_header('top-bar');
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

@@ -1,56 +1,409 @@
-<?php
-/* Template Name: Resultado de Busqueda */
-if (!empty($_POST['tipo_operacion_1'])) {
-    $tipo_propiedad_1 = '';
-    $poblacion_1 = '';
-    $zonas_poblacion = '';
-  
-    $tipo_operacion_1 = $_POST['tipo_operacion_1'];
-    if (!empty($_POST['tipo_propiedad_1'])) {
-      $tipo_propiedad_1 = $_POST['tipo_propiedad_1'];
-    }
-    if (!empty($_POST['poblacion_1'])) {
-      $poblacion_1 = $_POST['poblacion_1'];
-    }
-    if (!empty($_POST['zonas_poblacion'])) {
-      $zonas_poblacion = $_POST['zonas_poblacion'];
-    }
-}/* 
-elseif (!empty($_POST['zona_alquiler_id'])) {
-    if (pll_current_language() == 'es') {
-        $tipo_operacion_1 = 79;
-    }
-    elseif (pll_current_language() == 'ca') { 
-    $tipo_operacion_1 = 39;
-    }
-    $tipo_propiedad_1 = '';
-    $poblacion_1 = 532;
-    $zonas_poblacion = $_POST['zona_alquiler_id'];
-}
-elseif (!empty($_POST['zona_compra_id'])) {
-    if (pll_current_language() == 'es') {
-        $tipo_operacion_1 = 80;
-    }
-    elseif (pll_current_language() == 'ca') { 
-    $tipo_operacion_1 = 36;
-    }
-    $tipo_propiedad_1 = '';
-    $poblacion_1 = 532;
-    $zonas_poblacion = $_POST['zona_compra_id'];
-} */
+<?php /* Template Name: Resultado de Busqueda */
 
-else {
-    $tipo_operacion_slug = htmlspecialchars($_GET["tipo-operacion"]);
-    $tipos_operacion = get_terms('tipo-operacion');
-    foreach ($tipos_operacion as $term) {
-        if ($term->slug == $tipo_operacion_slug) {
-          $tipo_operacion_1 = $term->term_id;
+console_log($_POST);
+
+$tipo_operacion_1 = $_POST['tipo_operacion_1'];
+$tipo_propiedad_1 = $_POST['tipo_propiedad_1'];
+$poblacion_1 = $_POST['poblacion_1'];
+$zonas_poblacion = $_POST['zonas_poblacion'];
+
+// 0 0 0 0
+if (empty($tipo_operacion_1) && empty($tipo_propiedad_1) && empty($poblacion_1) && empty($zonas_poblacion)) {
+                    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+    );
+// 0 0 0 1
+} elseif (empty($tipo_operacion_1) && empty($tipo_propiedad_1) && empty($poblacion_1) && !empty($zonas_poblacion)) {
+
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            )
+        )
+    );
+// 0 0 1 0
+} elseif (empty($tipo_operacion_1) && empty($tipo_propiedad_1) && !empty($poblacion_1) && empty($zonas_poblacion)) {
+
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        )
+    );
+// 0 0 1 1
+} elseif (empty($tipo_operacion_1) && empty($tipo_propiedad_1) && !empty($poblacion_1) && !empty($zonas_poblacion)) {
+
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            ),
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        )
+    );
+// 0 1 0 0
+} elseif (empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && empty($poblacion_1) && empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 0 1 0 1
+} elseif (empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && empty($poblacion_1) && !empty($zonas_poblacion)) {
+
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 0 1 1 0
+} elseif (empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && !empty($poblacion_1) && empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 0 1 1 1
+} elseif (empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && !empty($poblacion_1) && !empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            ),
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 1 0 0 0
+} elseif (!empty($tipo_operacion_1) && empty($tipo_propiedad_1) && empty($poblacion_1) && empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            )
+        )
+    );
+// 1 0 0 1
+} elseif (!empty($tipo_operacion_1) && empty($tipo_propiedad_1) && empty($poblacion_1) && !empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            )
+        )
+    );
+// 1 0 1 0
+} elseif (!empty($tipo_operacion_1) && empty($tipo_propiedad_1) && !empty($poblacion_1) && empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            )
+        )
+    );
+// 1 0 1 1
+} elseif (!empty($tipo_operacion_1) && empty($tipo_propiedad_1) && !empty($poblacion_1) && !empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            ),
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            )
+        )
+    );
+// 1 1 0 0
+} elseif (!empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && empty($poblacion_1) && empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            ),
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 1 1 0 1
+} elseif (!empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && empty($poblacion_1) && !empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            ),
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 1 1 1 0
+} elseif (!empty($tipo_operacion_1) && !empty($tipo_propiedad_1) && !empty($poblacion_1) && empty($zonas_poblacion)) {
+    
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            ),
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+// 1 1 1 1
+} else {
+    $args_propiedades_bo = array(
+        'post_type' => 'propiedades',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key'     => 'zona',
+                'value'   => $zonas_poblacion,
+                'compare' => '=',
+            ),
+            array(
+                'key'     => 'poblacion',
+                'value'   => $poblacion_1,
+                'compare' => '=',
+            )
+        ),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'tipo-operacion',
+                'field' => 'term_id',
+                'terms' => $tipo_operacion_1
+            ),
+            array(
+                'taxonomy' => 'tipo-propiedad',
+                'field' => 'term_id',
+                'terms' => $tipo_propiedad_1
+            )
+        )
+    );
+}
+
+// Aquí guardaremos aquellos tipos de propiedad con propiedades
+$array_tipo_propiedad_con_propiedades = array();
+
+$tipos_propiedad = get_terms(
+    array(
+        'taxonomy' => 'tipo-propiedad',
+        'hide_empty' => true
+    )
+);
+
+$tipo_operacion_1 = $_POST['tipo_operacion_1'];
+
+// Caso 1: El tipo de operación es indiferente
+if ($tipo_operacion_1 == 'Indiferente' || $tipo_operacion_1 == '')  {
+
+    foreach ($tipos_propiedad as $tipo_propiedad_term) {
+
+        $args_propiedades = array(
+            'post_type' => 'propiedades',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'tipo-propiedad',
+                    'field' => 'term_id',
+                    'terms' => $tipo_propiedad_term->term_id
+                ),
+            )
+        );
+
+        $propiedades = new WP_Query($args_propiedades);
+
+        if ($propiedades->have_posts()) {
+            array_push($array_tipo_propiedad_con_propiedades, $tipo_propiedad_term);
         }
     }
-    $tipo_propiedad_1 = '';
-    $poblacion_1 = '';
-    $zonas_poblacion = '';
-  }
+} else {
+
+    foreach ($tipos_propiedad as $tipo_propiedad_term) {
+            
+        $args_propiedades = array(
+            'post_type' => 'propiedades',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'tipo-operacion',
+                    'field' => 'term_id',
+                    'terms' => $tipo_operacion_1
+                ),
+                array(
+                    'taxonomy' => 'tipo-propiedad',
+                    'field' => 'term_id',
+                    'terms' => $tipo_propiedad_term->term_id
+                ),
+            )
+        );
+
+        $propiedades = new WP_Query($args_propiedades);
+
+        if ($propiedades->have_posts()) {
+            array_push($array_tipo_propiedad_con_propiedades, $tipo_propiedad_term);
+        }
+    }
+}
+
+
+if (!empty($_POST['tipo_propiedad_1'])) {
+    $tipo_propiedad_1 = $_POST['tipo_propiedad_1'];
+}
+
+if (!empty($_POST['poblacion_1'])) {
+    $poblacion_1 = $_POST['poblacion_1'];
+}
+
+if (!empty($_POST['zonas_poblacion'])) {
+    $zonas_poblacion = $_POST['zonas_poblacion'];
+}
   
 get_header('top-bar');
 
@@ -64,7 +417,7 @@ $list[]=$item;
 }
 
 $item['taxonomy'] = 'tipo-operacion';
-$item['terms'] = $tipo_operacion_1;
+//$item['terms'] = $tipo_operacion_1;
 $item['field'] = 'term_id';
 $list[]=$item;
 
@@ -89,7 +442,7 @@ else {
 
 $args_propiedades = array(
             'post_type'       =>  'propiedades',
-            'posts_per_page'  =>  1000,
+            'posts_per_page'  =>  -1,
             'paged'           =>  $paged,
             'tax_query'       =>  $cleanArray,
             'meta_query'      =>  $meta_queries,
@@ -104,25 +457,26 @@ $args_propiedades = array(
                     <div class="col-12 p-0 m-0">
                         <h1 class="mb-0 titulo-resultados text-center operacion">
 
-                            <?php
-                                            
+                            <?php        
                                 $tipo_operacion_title = get_terms(
                                     array('taxonomy' => 'tipo-operacion',
                                     'hide_empty' => false)
                                 );
-                                if ( !empty($tipo_operacion_1) ) :                                                 
-                                foreach( $tipo_operacion_title as $termino ) {
-                                    if( $termino->term_id == $tipo_operacion_1 ) {
-                                        echo  $termino->name;
-                                    }
-                                } 
 
+                                if ( !empty($tipo_operacion_1) ) :                                                 
+                                    foreach( $tipo_operacion_title as $termino ) {
+                                        if( $termino->term_id == $tipo_operacion_1 ) {
+                                            echo  $termino->name;
+                                        }
+                                    } 
                                 endif;
                             ?>
                         </h1>
                     </div>
                 </div>
             </div>
+
+            <!-- FILTRO -->
             <form id="form-filtro" method="post" action="<?php echo admin_url('admin-ajax.php'); ?>">
 
                 <div class="accordion br-0 border-0" id="accordionExample">
@@ -142,194 +496,384 @@ $args_propiedades = array(
                             data-parent="#accordionExample">
                             <div class="card-body card-body br-0 border-0 bg-grey-light">
                                 <div class="row mb-3 mt-0 mx-auto">
+
                                     <div class="col-12 p-0 my-2" id="tipo_operacion">
+                                        
                                         <label class="color-coral ml-3"><?php pll_e('Tipo de operación'); ?></label>
                                         <select class="form-control FormControlSelect2" id="tipo_operacion_1" name="tipo_operacion_1">
                                             <?php
-                                            
-                                                $tipo_operacion_terms = get_terms(
-                                                    array('taxonomy' => 'tipo-operacion',
-                                                    'hide_empty' => false)
-                                                );
-                                                if ( !empty($tipo_operacion_1) ) : 
-                                            ?>
 
-                                            <?php 
-    
-                                                $output_1 = '';
-                                                $output_2 = '';
-                                                foreach( $tipo_operacion_terms as $term ) {
-                                                    if( $term->term_id == $tipo_operacion_1 ) {
-                                                        $output_1 = '<option value="'. $term->term_id .'">'. $term->name .'</option>';
-                                                    }
-                                                    else {
-                                                        $output_2 = '<option value="'. $term->term_id .'">'. $term->name .'</option>';
-                                                    }
-                                                }
-                                                echo $output_1 . $output_2;
-                                                endif;
+                                                if (empty($tipo_operacion_1)) { ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+                                                    
+                                                    <!-- Mostrar tots els tipus de operacions -->
+                                                    <?php $tipos_operacion = get_terms( array(
+                                                        'taxonomy' => 'tipo-operacion',
+                                                    ) );
+
+                                                    foreach ($tipos_operacion as $term) { ?>
+                                                        <option value="<?php echo $term->$term_id; ?>"><?php echo $term->name; ?></option>
+                                                    <?php }
+
+                                                } else {
+                                                    
+                                                    $term = get_term_by('term_id', $tipo_operacion_1, 'tipo-operacion'); ?>
+
+                                                    <option value="<?php echo $term->$term_id; ?>"><?php echo $term->name; ?></option>
+
+                                                    <?php 
+                                                        $tipos_operacion = get_terms( 'tipo-operacion',
+                                                            array( 
+                                                                'exclude'  => $tipo_operacion_1,
+                                                            )
+                                                        );
+
+                                                        foreach ($tipos_operacion as $term) { ?>
+                                                            <option value="<?php echo $term->$term_id; ?>"><?php echo $term->name; ?></option>
+                                                        <?php }
+                                                    ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+
+                                                <?php }
                                             ?>
                                         </select>
+
                                     </div>
+                                    
                                     <div class="col-12 p-0 my-2">
+
                                         <label class="color-coral ml-3"><?php pll_e('Tipo de propiedad'); ?></label>
-                                        <select class="form-control FormControlSelect2" id="tipo_propiedad_1"
-                                            name="tipo_propiedad_1">
-                                            <?php
-
-                                            $tipo_propiedad_terms = get_terms(
-                                                array('taxonomy' => 'tipo-propiedad',
-                                                'hide_empty' => false)
-                                            );
-                                            if ( !empty($tipo_propiedad_1) ) : ?>
-
-                                            <?php 
-                                                foreach( $tipo_propiedad_terms as $term ) {
-                                                    if( $term->term_id == $tipo_propiedad_1 ) {
-                                                        $output0.= '<option value="'. $term->term_id .'">
-                                                        '. $term->name .'</option>';
-                                                    }
-                                                }
-                                                echo $output0;
+                                        <select class="form-control FormControlSelect2" id="tipo_propiedad_1" name="tipo_propiedad_1">
                                             
-                                                foreach( $tipo_propiedad_terms as $term ) {
-                                                    if( $term->term_id != $tipo_propiedad_1 ) {
-                                                        $output.= '<option value="'. $term->term_id .'">
-                                                        '. $term->name .'</option>';
-                                                    }
-                                                }
-                                                echo $output; ?>
-                                            <option value><?php pll_e('Indiferente'); ?></option>
+                                            <?php if (empty($tipo_operacion_1)) { ?>
 
-                                            <?php else:
-                                                        
-                                                foreach( $tipo_propiedad_terms as $term ) {
-                                                   
-                                                    $outputt.= '<option value="'. $term->term_id .'">
-                                                    '. $term->name .'</option>';
-                                                } ?>
-                                            <option value><?php pll_e('Indiferente'); ?></option>
-                                            <?php echo $outputt;
+                                                <option value><?php pll_e('Elija tipo de operación'); ?></option>
+
+                                            <?php } else {
+
+                                                if (!empty($tipo_propiedad_1)) {
+                                                    $term = get_term_by('term_id', $tipo_propiedad_1, 'tipo-propiedad'); ?>
+
+                                                    <option value="<?php echo $term->$term_id; ?>"><?php echo $term->name; ?></option>
+
+                                                    <?php $array_tipo_propiedad_con_propiedades = array();
+
+                                                        $tipos_propiedad = get_terms(
+                                                            array(
+                                                                'taxonomy' => 'tipo-propiedad',
+                                                                'hide_empty' => true,
+                                                                'exclude' => $tipo_propiedad_1
+                                                            )
+                                                        );
+
+                                                        foreach ($tipos_propiedad as $tipo_propiedad_term) {
+                                                                
+                                                            $args_propiedades = array(
+                                                                'post_type' => 'propiedades',
+                                                                'posts_per_page' => -1,
+                                                                'tax_query' => array(
+                                                                    array(
+                                                                        'taxonomy' => 'tipo-propiedad',
+                                                                        'field' => 'term_id',
+                                                                        'terms' => $tipo_propiedad_term->term_id,
+                                                                    ),
+                                                                    array(
+                                                                        'taxonomy' => 'tipo-operacion',
+                                                                        'field' => 'term_id',
+                                                                        'terms' => $tipo_operacion_1,
+                                                                    )
+                                                                )
+                                                            );
+
+                                                            $propiedades = new WP_Query($args_propiedades);
+
+                                                            if ($propiedades->have_posts()) {
+                                                                array_push($array_tipo_propiedad_con_propiedades, $tipo_propiedad_term);
+                                                            }
+                                                        }
+
+                                                        foreach ($array_tipo_propiedad_con_propiedades as $tipo_propiedad_con_propiedades) { ?>
+                                                            <option value="<?php echo $tipo_propiedad_con_propiedades->term_id; ?>"><?php echo $tipo_propiedad_con_propiedades->name; ?></option>
+                                                    <?php } ?>
+                                                    
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+ 
+                                                <?php } else { ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
                                                 
-                                            endif;
-                                            ?>
+                                                    <?php $array_tipo_propiedad_con_propiedades = array();
+
+                                                    $tipos_propiedad = get_terms(
+                                                        array(
+                                                            'taxonomy' => 'tipo-propiedad',
+                                                            'hide_empty' => true,
+                                                        )
+                                                    );
+
+                                                    foreach ($tipos_propiedad as $tipo_propiedad_term) {
+                                                            
+                                                        $args_propiedades = array(
+                                                            'post_type' => 'propiedades',
+                                                            'posts_per_page' => -1,
+                                                            'tax_query' => array(
+                                                                array(
+                                                                    'taxonomy' => 'tipo-propiedad',
+                                                                    'field' => 'term_id',
+                                                                    'terms' => $tipo_propiedad_term->term_id,
+                                                                ),
+                                                                array(
+                                                                    'taxonomy' => 'tipo-operacion',
+                                                                    'field' => 'term_id',
+                                                                    'terms' => $tipo_operacion_1,
+                                                                )
+                                                            )
+                                                        );
+
+                                                        $propiedades = new WP_Query($args_propiedades);
+
+                                                        if ($propiedades->have_posts()) {
+                                                            array_push($array_tipo_propiedad_con_propiedades, $tipo_propiedad_term);
+                                                        }
+                                                    }
+
+                                                    foreach ($array_tipo_propiedad_con_propiedades as $tipo_propiedad_con_propiedades) { ?>
+                                                        <option value="<?php echo $tipo_propiedad_con_propiedades->term_id; ?>"><?php echo $tipo_propiedad_con_propiedades->name; ?></option>
+                                                    <?php } ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+
+                                                <?php } 
+                                            } ?>
+
                                         </select>
                                     </div>
 
                                     <div class="col-12 p-0 my-2" id="search-poblacion">
-                                        <label class="color-coral ml-3"><?php pll_e('Provincia'); ?></label>
-                                        <select class="form-control FormControlSelect2" id="poblacion_1"
-                                            name="poblacion_1">
-                                            <?php
-                                        $args = array(
-                                          'post_type' => 'poblacion',
-                                          'posts_per_page' 	=> -1,
-                                          'orderby'					=> 'title',
-                                          'order'   				=> 'ASC'
-                                        );
-                                        $poblacion_query = new WP_Query( $args );
-                                        ?>
-                                            <?php if (!empty($poblacion_1)) { ?>
-                                            <option value="<?php echo $poblacion_1 ?>">
-                                                <?php echo get_the_title($poblacion_1)?>
-                                            </option>
-                                            <?php
-                                          while ( $poblacion_query->have_posts() ) : $poblacion_query->the_post();
-                                            $post_id = get_the_ID();
-                                            if ($post_id != $poblacion_1) {
-                                          ?>
-                                            <option value="<?php echo $post_id ?>"><?php the_title() ?></option>
-                                            <?php
-                                          }
-                                          endwhile;
-                                          wp_reset_query();
-                                          ?>
-                                            <option value><?php pll_e('Indiferente'); ?></option>
 
-                                            <?php } else {?>
-                                            <option value=""><?php pll_e('Indiferente'); ?></option>
-                                            <?php
-                                        while ( $poblacion_query->have_posts() ) : $poblacion_query->the_post();
-                                          $post_id = get_the_ID();
-                                        ?>
-                                            <option value="<?php echo $post_id ?>"><?php the_title() ?></option>
-                                            <?php
-                                        endwhile;
-                                        wp_reset_query();
-                                        }
-                                        ?>
+                                        <label class="color-coral ml-3"><?php pll_e('Municipio'); ?></label>
+                                        <select class="form-control FormControlSelect2" id="poblacion_1" name="poblacion_1">
+
+                                            <?php if (empty($tipo_propiedad_1)) { ?>
+
+                                                <option value><?php pll_e('Elija tipo de propiedad'); ?></option>
+
+                                            <?php } else {
+        
+                                                if (!empty($poblacion_1)) { ?>
+
+                                                    <option value="<?php echo $poblacion_1; ?>"><?php echo get_the_title($poblacion_1); ?></option>
+                                                
+                                                    <?php 
+                                                    
+                                                        $args_municipios = array(
+                                                            'post_type' => 'poblacion',
+                                                            'posts_per_page' => -1,
+                                                            'post__not_in' => array($poblacion_1),
+                                                        );
+                                               
+                                                        $municipios = new WP_Query($args_municipios);
+                                                
+                                                        if ($municipios->have_posts()) {
+                                                            while ($municipios->have_posts()) { $municipios->the_post();
+                                                                
+                                                                $id_municipio = get_the_ID();
+
+                                                                $args_propiedades = array(
+                                                                    'post_type' => 'propiedades',
+                                                                    'posts_per_page' => -1,
+                                                                    'meta_query' => array(
+                                                                        array(
+                                                                            'key' => 'poblacion',
+                                                                            'value' => $id_municipio,
+                                                                            'compare' => '='
+                                                                        )
+                                                                    ),
+                                                                    'tax_query' => array(
+                                                                        array(
+                                                                            'taxonomy' => 'tipo-operacion',
+                                                                            'field' => 'term_id',
+                                                                            'terms' => $tipo_operacion_1
+                                                                        ),
+                                                                        array(
+                                                                            'taxonomy' => 'tipo-propiedad',
+                                                                            'field' => 'term_id',
+                                                                            'terms' => $tipo_propiedad_1
+                                                                        )
+                                                                    )
+                                                                );
+
+                                                                $propiedades = new WP_Query($args_propiedades);
+
+                                                                if ($propiedades->have_posts()) { ?>
+                                                                    <option value="<?php echo get_the_ID(); ?>"><?php the_title(); ?></option>
+                                                                <?php }
+                                                            }
+                                                        }
+                                                    ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+                                                
+                                                <?php } else { ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+
+                                                    <?php $args_municipios = array(
+                                                        'post_type' => 'poblacion',
+                                                        'posts_per_page' => -1,
+                                                    );
+                                            
+                                                    $municipios = new WP_Query($args_municipios);
+                                            
+                                                    if ($municipios->have_posts()) {
+                                                        while ($municipios->have_posts()) { $municipios->the_post();
+                                                            
+                                                            $id_municipio = get_the_ID();
+
+                                                            $args_propiedades = array(
+                                                                'post_type' => 'propiedades',
+                                                                'posts_per_page' => -1,
+                                                                'meta_query' => array(
+                                                                    array(
+                                                                        'key' => 'poblacion',
+                                                                        'value' => $id_municipio,
+                                                                        'compare' => '='
+                                                                    )
+                                                                ),
+                                                                'tax_query' => array(
+                                                                    array(
+                                                                        'taxonomy' => 'tipo-operacion',
+                                                                        'field' => 'term_id',
+                                                                        'terms' => $tipo_operacion_1
+                                                                    ),
+                                                                    array(
+                                                                        'taxonomy' => 'tipo-propiedad',
+                                                                        'field' => 'term_id',
+                                                                        'terms' => $tipo_propiedad_1
+                                                                    )
+                                                                )
+                                                            );
+
+                                                            $propiedades = new WP_Query($args_propiedades);
+
+                                                            if ($propiedades->have_posts()) { ?>
+                                                                <option value="<?php echo get_the_ID(); ?>"><?php the_title(); ?></option>
+                                                            <?php }
+                                                        }
+                                                    } ?>
+                                                
+                                                <?php }
+                                            } ?>
                                         </select>
                                     </div>
 
                                     <div class="col-12 p-0 my-2">
-                                        <label class="color-coral ml-3"><?php pll_e('Municipio'); ?></label>
-                                        <select class="form-control FormControlSelect2" id="zonas-poblacion"
-                                            name="zonas_poblacion">
+                                        
+                                        <label class="color-coral ml-3"><?php pll_e('Zona'); ?></label>
+                                        <select class="form-control FormControlSelect2" id="zonas-poblacion" name="zonas_poblacion">
+                                            
+                                            <?php if (empty($poblacion_1)) { ?>
+                                                
+                                                <option value><?php pll_e('Elija población'); ?></option>
 
-                                            <?php
-                                          if (!empty($poblacion_1) && empty($zonas_poblacion)) {
-                                          ?>
-                                            <?php
-                                          $args_zones = array(
-                                            'post_type' => 'zona',
-                                            'posts_per_page' 	=> -1,
-                                            'orderby'					=> 'title',
-                                            'order'   				=> 'ASC',
-                                            'meta_query' => array(
-                                              array(
-                                                  'key'     => 'location_poblacion',
-                                                  'value'   => $poblacion_1,
-                                              ),
-                                          ));
-                                          $zones_query = new WP_Query( $args_zones );
-                                            if( $zones_query->have_posts() ) {
-                                            ?>
-                                            <option value><?php pll_e('Indiferente'); ?></option>
-                                            <?php
-                                            while ( $zones_query->have_posts() ) : $zones_query->the_post();
-                                              $post_id = get_the_ID();
-                                            ?>
-                                            <option value="<?php echo $post_id ?>"><?php the_title() ?></option>
-                                            <?php
-                                            endwhile;
-                                            wp_reset_postdata();
-                                            }
-                                            else {
-                                                echo '<option value>No hay resultados para esa provincia</option>';
-                                            }
-                                          ?>
+                                            <?php } else {
 
-                                            <?php } elseif (!empty($poblacion_1) && !empty($zonas_poblacion)) {
-                                          $args_zones = array(
-                                            'post_type' => 'zona',
-                                            'posts_per_page' 	=> -1,
-                                            'orderby'					=> 'title',
-                                            'order'   				=> 'ASC',
-                                            'meta_query' => array(
-                                              array(
-                                                  'key'     => 'location_poblacion',
-                                                  'value'   => $poblacion_1,
-                                              ),
-                                          ));
-                                          $zones_query = new WP_Query( $args_zones );
-                                        ?>
-                                            <option value="<?php echo $poblacion_1 ?>">
-                                                <?php echo get_the_title($zonas_poblacion)?></option>
+                                                if (!empty($zonas_poblacion)) { ?>
 
-                                            <?php
-                                          while ( $zones_query->have_posts() ) : $zones_query->the_post();
-                                            $post_id = get_the_ID();
-                                            if ($post_id != $zonas_poblacion) {
-                                          ?>
-                                            <option value="<?php echo $post_id ?>"><?php the_title() ?></option>
-                                            <?php
-                                          }
-                                          endwhile;
-                                          wp_reset_postdata();?>
+                                                    <option value="<?php echo $zonas_poblacion; ?>"><?php echo get_the_title($zonas_poblacion); ?></option>
 
-                                            <?php } else { ?>
-                                            <option value><?php pll_e('Elija Provincia'); ?></option>
-                                            <?php } ?>
+                                                    <?php $args_zonas = array(
+                                                        'post_type' => 'zona',
+                                                        'posts_per_page' => -1,
+                                                        'post__not_in' => array($zonas_poblacion),
+                                                    );
+
+                                                    $zonas = new WP_Query( $args_zonas );
+
+                                                    if ($zonas->have_posts()) {
+                                                        
+                                                        while ($zonas->have_posts()) { $zonas->the_post();
+
+                                                            $id_zona = get_the_ID();
+
+                                                            $args_propiedades = array(
+                                                                'post_type' => 'propiedades',
+                                                                'posts_per_page' => -1,
+                                                                'meta_query' => array(
+                                                                    array(
+                                                                        'key'     => 'zona',
+                                                                        'value'   => $id_zona,
+                                                                        'compare' => '=',
+                                                                    )
+                                                                )
+                                                            );
+                                                            
+                                                            $propiedades = new WP_Query( $args_propiedades );
+                                                            if ($propiedades->have_posts()) { ?>
+                                                                <option value="<?php echo get_the_ID(); ?>"><?php the_title(); ?></option>
+                                                            <?php }
+                                                        }
+                                                    } ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+
+                                                <?php } else { ?>
+
+                                                    <option value><?php pll_e('Indiferente'); ?></option>
+
+                                                    <?php $args_zonas = array(
+                                                        'post_type' => 'zona',
+                                                        'posts_per_page' => -1,
+                                                    );
+
+                                                    $zonas = new WP_Query( $args_zonas );
+
+                                                    if ($zonas->have_posts()) {
+                                                        
+                                                        while ($zonas->have_posts()) { $zonas->the_post();
+
+                                                            $id_zona = get_the_ID();
+
+                                                            $args_propiedades = array(
+                                                                'post_type' => 'propiedades',
+                                                                'posts_per_page' => -1,
+                                                                'meta_query' => array(
+                                                                    array(
+                                                                        'key'     => 'zona',
+                                                                        'value'   => $id_zona,
+                                                                        'compare' => '=',
+                                                                    ),
+                                                                    array(
+                                                                        'key'     => 'poblacion',
+                                                                        'value'   => $poblacion_1,
+                                                                        'compare' => '=',
+                                                                    )
+                                                                ),
+                                                                'tax_query' => array(
+                                                                    array(
+                                                                        'taxonomy' => 'tipo-operacion',
+                                                                        'field' => 'term_id',
+                                                                        'terms' => $tipo_operacion_1
+                                                                    ),
+                                                                    array(
+                                                                        'taxonomy' => 'tipo-propiedad',
+                                                                        'field' => 'term_id',
+                                                                        'terms' => $tipo_propiedad_1
+                                                                    )
+                                                                )
+                                                            );
+                                                            
+                                                            $propiedades = new WP_Query( $args_propiedades );
+                                                            if ($propiedades->have_posts()) { ?>
+                                                                <option value="<?php echo get_the_ID(); ?>"><?php the_title(); ?></option>
+                                                            <?php }
+                                                        }
+                                                    } ?>
+
+                                                <?php }
+                                            } ?>
 
                                         </select>
                                     </div>
@@ -446,137 +990,153 @@ $args_propiedades = array(
                 <div class="row mb-lg-5 mt-lg-5 mt-3 mb-2 query aqui" id="respuesta_filtro">
 
                     <?php
-                    $search_query = new WP_Query( $args_propiedades );
-                    if( $search_query->have_posts() ) {
-                        while ( $search_query->have_posts() ) : $search_query->the_post();
-                        $post_id = get_the_ID();
-                    ?>
-                    <div class="col-lg-6 col-12">
-                        <div class="card mb-5 br-0 border-right-0 border-top-0 border-bottom-0 border-left-0 br-x">
-                            <div class="galeria-resultados">
+                    
+                        $search_query = new WP_Query( $args_propiedades_bo );
 
-                                <?php
-                                if( have_rows('slider_propiedades') ):
-                                while ( have_rows('slider_propiedades') ) : the_row();
-                                ?>
+                        if( $search_query->have_posts() ) {
+                            while ( $search_query->have_posts() ) : $search_query->the_post();
+                            
+                                $post_id = get_the_ID(); ?>
+                            
+                                <div class="col-lg-6 col-12">
+                                    <div class="card mb-5 br-0 border-right-0 border-top-0 border-bottom-0 border-left-0 br-x">
+                                        <div class="galeria-resultados">
 
-                                <div class="img-zonas-home">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php img_with_alt_sub('imagen_propiedades'); ?>
-                                    </a>
-                                </div>
+                                            <?php
+                                                if( have_rows('slider_propiedades') ):
+                                                    while ( have_rows('slider_propiedades') ) : the_row(); ?>
 
-                                <?php
-                                endwhile;
-                                endif;
-                                ?>
+                                                        <div class="img-zonas-home">
+                                                            <a href="<?php the_permalink(); ?>">
+                                                                <?php img_with_alt_sub('imagen_propiedades'); ?>
+                                                            </a>
+                                                        </div>
 
-                            </div>
-                            <div class="card-body border-left border-right br-0">
-                                <a href="<?php the_permalink(); ?>">
-                                    <h3 class="mb-1 propiedad color-orange-gradiente fw-900"><?php the_title(); ?></h3>
-                                </a>
-                                
-                                <?php 
-                                    if ( is_user_logged_in() && get_field('mostrar_direccion') == 'Dirección Exacta') {
-
-                                   /*  $user = wp_get_current_user();
-                                    $user_id = $user->ID;
-                                    $user_info = get_userdata($user_id);
-
-                                    if ( in_array( 'vendedor', $user_info->roles ) || in_array( 'administrator', $user_info->roles ) ) : */
-
-                                    ?>
-
-                                    <p class="card-text fw-500 color-blue">
-                                        <?php the_field('ubicacion_de_la_propiedad');?>
-                                    </p>
-
-                                    <?php } elseif (get_field('mostrar_direccion') == 'No mostrar') { ?>
-                                        <p class="card-text fw-500 color-blue">
-
-                                        </p>
-                                        <?php}
-                                        ?>
-
-                                <?php 
-                                //endif;
-                                }else {
-                                    echo '<span class="text-white direccion fs-08 fw-600">Suscríbete para ver contenido oculto</span>';	
-                                }?>
-                                <div class="container">
-                                    <div class="row">
-                                        <?php
-                                        if( have_rows('caracteristicas') ):
-                                        while ( have_rows('caracteristicas') ) : the_row();
-                                        ?>
-                                        <div class="col-6 px-0 mx-0">
-
-                                            <div class="mb-3 d-flex align-items-center">
-                                                <span class="icon-area color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"><?php the_sub_field('metros_cuadrados'); ?>
-                                                    m<sup>2</sup></p>
-                                            </div>
-                                            <div class="mb-3 d-flex align-items-center">
-                                                <span class="icon-bathroom color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"> <?php the_sub_field('banos'); ?>
-                                                    <?php pll_e('Baños'); ?></p>
-                                            </div>
-
+                                                    <?php endwhile;
+                                                endif;
+                                            ?>
 
                                         </div>
 
-                                        <div class="col-6 px-0 mx-0">
-                                            <div class="mb-3 d-flex align-items-center">
-                                                <span class="icon-bed color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"><?php the_sub_field('habitaciones'); ?>
-                                                    <?php pll_e('Habitaciones'); ?></p>
+                                        <div class="card-body border-left border-right br-0">
+
+                                            <a href="<?php the_permalink(); ?>">
+                                                <h3 class="mb-1 propiedad color-orange-gradiente fw-900"><?php the_title(); ?></h3>
+                                            </a>
+                                            
+                                            <?php
+
+                                                if ( is_user_logged_in() && get_field('mostrar_direccion') == 'Dirección Exacta') {
+
+                                                    /* $user = wp_get_current_user();
+                                                    $user_id = $user->ID;
+                                                    $user_info = get_userdata($user_id);
+
+                                                    if ( in_array( 'vendedor', $user_info->roles ) || in_array( 'administrator', $user_info->roles ) ) : */ ?>
+
+                                                    <p class="card-text fw-500 color-blue">
+                                                        <?php the_field('ubicacion_de_la_propiedad');?>
+                                                    </p>
+
+                                                <?php } elseif (get_field('mostrar_direccion') == 'No mostrar') { ?>
+                                                    
+                                                    <p class="card-text fw-500 color-blue"></p>
+                                                    
+                                                <?php }
+                                            ?>
+
+                                            <?php 
+                                            //endif;
+                                            /*}else {
+                                                echo '<span class="text-white direccion fs-08 fw-600">Suscríbete para ver contenido oculto</span>';	
+                                            }*/?>
+                                            
+                                            <div class="container">
+                                                <div class="row">
+                                                    <?php
+                                                        if( have_rows('caracteristicas') ):
+                                                            while ( have_rows('caracteristicas') ) : the_row(); ?>
+
+                                                                <div class="col-6 px-0 mx-0">
+
+                                                                    <div class="mb-3 d-flex align-items-center">
+                                                                        <span class="icon-area color-coral fs-18 mr-2"></span>
+                                                                        <p class="mb-0 fs-09"><?php the_sub_field('metros_cuadrados'); ?>
+                                                                            m<sup>2</sup></p>
+                                                                    </div>
+                                                                    <div class="mb-3 d-flex align-items-center">
+                                                                        <span class="icon-bathroom color-coral fs-18 mr-2"></span>
+                                                                        <p class="mb-0 fs-09"> <?php the_sub_field('banos'); ?>
+                                                                            <?php pll_e('Baños'); ?></p>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-6 px-0 mx-0">
+
+                                                                    <div class="mb-3 d-flex align-items-center">
+                                                                        <span class="icon-bed color-coral fs-18 mr-2"></span>
+                                                                        <p class="mb-0 fs-09">
+                                                                            <?php the_sub_field('habitaciones'); ?>
+                                                                            <?php pll_e('Habitaciones'); ?>
+                                                                        </p>
+                                                                    </div>
+                                                                    
+                                                                    <?php if ( get_sub_field('plazas_de_parkings') ) { ?>
+
+                                                                        <div class="mb-3 d-flex align-items-center">
+                                                                            <span class="icon-parking color-coral fs-18 mr-2"></span>
+                                                                            <p class="mb-0 fs-09">
+                                                                                <?php the_sub_field('plazas_de_parkings'); ?>
+                                                                                <?php pll_e('Plaza Garaje'); ?>
+                                                                            </p>
+                                                                        </div>
+
+                                                                    <?php } ?>
+
+                                                                </div>
+                                                            <?php endwhile;
+                                                        endif;
+                                                    ?>
+
+                                                    <div class="col-12">
+                                                        <a href="<?php the_permalink(); ?>" class="mb-1 propiedad color-blue fw-900">Ver Detalles</a>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            <?php if( get_sub_field('plazas_de_parkings') ) {?>
-                                            <div class="mb-3 d-flex align-items-center">
-                                                <span class="icon-parking color-coral fs-18 mr-2"></span>
-                                                <p class="mb-0 fs-09"> <?php the_sub_field('plazas_de_parkings'); ?>
-                                                    <?php pll_e('Plaza Garaje'); ?></p>
-                                            </div>
-                                            <?php } ?>
+
                                         </div>
-                                        <?php
-                                        endwhile;
-                                        endif;
-                                        ?>
-                                        <div class="col-12">
-                                            <a href="<?php the_permalink(); ?>" class="mb-1 propiedad color-blue fw-900">Ver Detalles</a>
+
+                                        <div class="card-footer px-5 bg-coral d-flex justify-content-between border-0">
+                                            
+                                            <span class="text-uppercase precio text-white fw-600"><?php pll_e('Precio'); ?></span>
+                                            
+                                            <span
+                                                class="text-white direccion fw-600"><?php echo number_format(intval(get_field('precio')), 0,",","."); ?>
+                                                <?php if ($tipo_operacion_1 == 8 ) { ?>
+                                                €
+                                                <?php }else{?>
+                                                €/mes
+                                                <?php } ?>
+                                            </span>
+
                                         </div>
+
                                     </div>
                                 </div>
 
+                            <?php endwhile;
+                            wp_reset_postdata();
+                        } else { ?>
+
+                            <div class="col-12">
+                                <?php pll_e('No hay resultados para la búsqueda actual.'); ?>
                             </div>
-                            <div class="card-footer px-5 bg-coral d-flex justify-content-between border-0">
-                                <span class="text-uppercase precio text-white fw-600"><?php pll_e('Precio'); ?></span>
-                                
-                                <span
-                                    class="text-white direccion fw-600"><?php echo number_format(intval(get_field('precio')), 0,",","."); ?>
-                                    <?php if ($tipo_operacion_1 == 8 ) { ?>
-                                    €
-                                    <?php }else{?>
-                                    €/mes
-                                    <?php } ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <?php
-                        endwhile;
-                        wp_reset_postdata();
-                    } 
-                    else {?>
-                    <div class="col-12">
-
-                        <?php pll_e('No hay resultados para la búsqueda actual.'); ?>
-
-                        <?php  } ?>
-                    </div>
+                        <?php }
+                    ?>
+                        
                 </div>
             </div>
 
