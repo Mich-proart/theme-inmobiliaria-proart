@@ -22,32 +22,8 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
-    <?php if (pll_current_language() == 'ca') { ?>
-    <script>
-    window.addEventListener("load", function() {
-        window.cookieconsent.initialise({
-            "palette": {
-                "popup": {
-                    "background": "#fff",
-                    "text": "#4a4a4a"
-                },
-                "button": {
-                    "background": "#000",
-                    "text": "#fff",
-                    "border": "#000"
-                }
-            },
-            "content": {
-                "message": "Utilitzem cookies pròpies i de tercers per a millorar l'experiència de l'usuari a través de la seva navegació. Si continues navegant acceptes el seu ús",
-                "dismiss": "Entès",
-                "link": "Politica de Cookies",
-                "href": ""
-            }
-        })
-    });
-    </script>
-    <?php }
-    else if (pll_current_language() == 'es') { ?>
+    
+   
     <script>
     window.addEventListener("load", function() {
         window.cookieconsent.initialise({
@@ -66,14 +42,12 @@
                 "message": "Utilizamos cookies propias y de terceros para mejorar la experiencia del usuario a través de su navegación. Si continúas navegando aceptas su uso",
                 "dismiss": "Entendido",
                 "link": "Política de Cookies",
-                "href": "https://aincasa.fcweb.es/politica-privacidad/"
+                "href": "https://servinghouse.es/politica-privacidad/"
             }
         })
     });
     </script>
-    <?php
-    }
-    wp_head(); ?>
+    <?php wp_head(); ?>
 
 </head>
 
@@ -122,57 +96,7 @@
           }
           ?>
 
-                <div class="top-bar wrapper bg-white pt-2 d-lg-block d-none">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="d-flex align-items-center justify-content-end">
-                                    <!-- <div class="mr-3">
-                                        <i class="icon-facebook mr-2 color-blue"></i>
-                                        <i class="icon-twitter mr-2 color-blue"></i>
-                                        <i class="icon-instagram mr-2 color-blue"></i>
-                                        <i class="icon-linkedin mr-2 color-blue"></i>
-                                        <i class="icon-pinterest mr-2 color-blue"></i>
-                                        <i class="icon-marker mr-2 color-blue"></i>
-                                        <i class="icon-phone mr-2 color-blue"></i>
-                                        <i class="icon-email-1 mr-2 color-blue"></i>
-                                        <i class="icon-search mr-2 color-blue"></i>
-                                        <i class="icon-email-dark color-blue"></i>
-                                    </div> -->
-                                    <div class="es-ca d-flex justify-content-center align-items-center">
-
-                                        <?php
-                                          if (pll_current_language() == 'es') {
-                                        ?>
-                                        <span class="fs-08 fw-400 text-uppercase color-custom-black">
-                                            ES
-                                        </span>
-                                        <span class="px-2">|</span>
-                                        <a class="fs-08 fw-400 color-blue text-uppercase"
-                                            href="<?php echo cpts_translation_url('ca') ?>">
-                                            CA
-                                        </a>
-                                        <?php }
-                                          else if (pll_current_language() == 'ca') { ?>
-                                        <a class="fs-08 fw-400 color-blue text-uppercase"
-                                            href="<?php echo cpts_translation_url('es') ?>">
-                                            ES
-                                        </a>
-                                        <span class="px-2">|</span>
-                                        <span class="fs-08 text-uppercase color-custom-black fw-400">
-                                            CA
-                                        </span>
-                                        <?php }
-
-                                          ?>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <div class="wrapper">
                     <div class="container-fluid">

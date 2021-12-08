@@ -173,7 +173,7 @@ print_r2($meta_queries); */
 ?>
 
 <div class="col-lg-6 col-12">
-    <div class="card mb-5 br-0 border-right border-top-0 border-bottom-0 border-left-0">
+    <div class="card mb-5 br-0 border-right border-top-0 border-bottom-0 border-left-0 br-x">
         <div class="galeria-resultados">
 
             <?php
@@ -191,11 +191,26 @@ print_r2($meta_queries); */
             ?>
 
         </div>
-        <div class="card-body border-left border-bottom">
+        <div class="card-body border-left br-0">
             <a href="<?php the_permalink(); ?>">
-                <h3 class="mb-1 propiedad"><?php the_title(); ?></h3>
+                <h3 class="mb-1 propiedad color-orange-gradiente fw-900"><?php the_title(); ?></h3>
             </a>
-            <p class="direccion"><?php the_field('ubicacion_de_la_propiedad'); ?></p>
+
+            <?php 
+                if ( is_user_logged_in() ) {
+
+                $user = wp_get_current_user();
+                $user_id = $user->ID;
+                $user_info = get_userdata($user_id);
+
+                if ( in_array( 'vendedor', $user_info->roles ) || in_array( 'administrator', $user_info->roles ) ) : 
+            ?>
+            <p class="direccion fs-08 fw-600"><?php the_field('ubicacion_de_la_propiedad'); ?></p>
+
+            <?php endif;
+                }else {
+                    echo '<span class="text-white direccion fs-08 fw-600">Suscríbete para ver contenido oculto</span>';	
+            }?>
             <div class="container">
                 <div class="row">
                     <?php
@@ -212,7 +227,7 @@ print_r2($meta_queries); */
                         <div class="mb-3 d-flex align-items-center">
                             <span class="icon-bathroom color-coral fs-18 mr-2"></span>
                             <p class="mb-0 fs-09"> <?php the_sub_field('banos'); ?>
-                                <?php if (pll_current_language() == 'es') { ?>Baños<?php } else if (pll_current_language() == 'ca') { ?>Banys<?php } ?>
+                            <?php pll_e('Baños'); ?>
                             </p>
                         </div>
 
@@ -223,30 +238,34 @@ print_r2($meta_queries); */
                         <div class="mb-3 d-flex align-items-center">
                             <span class="icon-bed color-coral fs-18 mr-2"></span>
                             <p class="mb-0 fs-09"><?php the_sub_field('habitaciones'); ?>
-                                <?php if (pll_current_language() == 'es') { ?>Habitaciones<?php } else if (pll_current_language() == 'ca') { ?>Habitacions<?php } ?>
+                            <?php pll_e('Habitaciones'); ?>
                             </p>
                         </div>
                         <div class="mb-3 d-flex align-items-center">
                             <span class="icon-parking color-coral fs-18 mr-2"></span>
                             <p class="mb-0 fs-09"> <?php the_sub_field('plazas_de_parkings'); ?>
-                                <?php if (pll_current_language() == 'es') { ?>Plaza
-                                garaje<?php } else if (pll_current_language() == 'ca') { ?>Plaza garatge<?php } ?></p>
+                            <?php pll_e('Plaza garaje'); ?>
+                            </p>
                         </div>
                     </div>
                     <?php
                         endwhile;
                         endif;
                     ?>
+                    <div class="col-12">
+                        <a href="<?php the_permalink(); ?>" class="color-black">Ver Detalles</a>
+                    </div>
                 </div>
             </div>
 
         </div>
-        <div class="card-footer px-5 bg-dos d-flex justify-content-between br-0 border-0">
+        <div class="card-footer px-5 bg-coral d-flex justify-content-between border-0">
             <span
-                class="text-uppercase precio color-beige"><?php if (pll_current_language() == 'es') { ?>Precio<?php } else if (pll_current_language() == 'ca') { ?>Preu<?php } ?></span>
+                class="text-uppercase precio text-white fw-600"><?php pll_e('Precio'); ?></span>
+            
             <span
                 class="text-white direccion fw-600"><?php echo number_format(intval(get_field('precio')), 0,",","."); ?>
-                <?php if ($tipo_operacion_1 == 8 || $tipo_operacion_1 == 36) { ?>
+                <?php if ($tipo_operacion_1 == 80) { ?>
                 €
                 <?php }else{?>
                 €/mes
@@ -262,11 +281,9 @@ print_r2($meta_queries); */
     else :
 ?>
 <div class="col-12">
-<?php if (pll_current_language() == 'es') { ?>
-    <span class="titulo-resultados">No hay resultados para la búsqueda actual. </span>
-<?php } else if (pll_current_language() == 'ca') { ?>
-    <span class="titulo-resultados">No hi ha resultats per a la cerca actual. </span>
-<?php } ?>
+
+    <span class="titulo-resultados"><?php pll_e('No hay resultados para la búsqueda actual.'); ?> </span>
+
 </div>
 <?php
 endif;
