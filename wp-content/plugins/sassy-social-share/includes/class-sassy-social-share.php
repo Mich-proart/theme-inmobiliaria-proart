@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @since      1.0.0
+ * @since      1.0
  *
  */
 
@@ -18,42 +18,42 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      1.0
  */
 class Sassy_Social_Share {
 
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	protected $plugin_slug;
 
 	/**
 	 * Current version of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	protected $version;
 
 	/**
 	 * Options saved in database.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public $options;
 
 	/**
 	 * Member to assign object of Sassy_Social_Share_Public Class.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public $plugin_public;
 
 	/**
 	 * Define the core functionality of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function __construct( $version ) {
 
@@ -74,7 +74,7 @@ class Sassy_Social_Share {
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	private function load_dependencies() {
 
@@ -108,7 +108,7 @@ class Sassy_Social_Share {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	private function set_locale() {
 
@@ -119,7 +119,7 @@ class Sassy_Social_Share {
 	/**
 	 * Register all of the hooks related to the admin area functionality of the plugin
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	private function call_admin_hooks() {
 
@@ -164,7 +164,7 @@ class Sassy_Social_Share {
 	/**
 	 * Register all of the hooks related to the front-end functionality of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	private function call_public_hooks() {
 
@@ -213,12 +213,14 @@ class Sassy_Social_Share {
 			add_filter( 'heateor_sss_target_share_url_filter', array( $plugin_public, 'append_mycred_referral_id' ), 10, 3 );
 		}
 
+		add_filter( 'safe_style_css', array( $plugin_public, 'add_safe_styles' ), 10, 1 );
+
 	}
 
 	/**
 	 * Define widgets
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	private function define_widgets() {
 
@@ -234,7 +236,7 @@ class Sassy_Social_Share {
 	/**
 	 * Define shortcodes
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	private function define_shortcodes() {
 
@@ -253,7 +255,7 @@ class Sassy_Social_Share {
 	/**
 	 * Returns the plugin slug
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The plugin slug.
 	 */
 	public function get_plugin_slug() {
@@ -265,7 +267,7 @@ class Sassy_Social_Share {
 	/**
 	 * Retrieve the version number of the plugin
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {
